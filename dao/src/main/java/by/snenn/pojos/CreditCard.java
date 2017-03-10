@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Table(name = "CREDIT_CARD")
 public class CreditCard implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @Column

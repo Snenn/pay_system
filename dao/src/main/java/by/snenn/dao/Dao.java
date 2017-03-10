@@ -1,6 +1,7 @@
 package by.snenn.dao;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -62,7 +63,9 @@ public class Dao<Type> implements IDao<Type> {
         }
         return type;
     }
-
+    protected Criteria createEntityCriteria(){
+        return getSession().createCriteria(getPersistentClass());
+    }
     private Class<Type> getPersistentClass() {
         return (Class<Type>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }

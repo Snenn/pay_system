@@ -1,8 +1,11 @@
-<%@ page language="java" pageEncoding="UTF-8" %>
-<%@ include file="/assests/include/begin-html.jsp" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ include file="/assests/include/begin-html.jsp" %>
 
-<form class="form-horizontal" action="do?command=SIGNUP" method="post">
+<s:form id="registrationForm" class="form-horizontal" action="reg/signUp" modelAttribute="userForm" method="post">
 <fieldset>
 
 <!-- Form Name -->
@@ -56,7 +59,7 @@
 
 
 </fieldset>
-</form>
+</s:form>
 
 <%@ include file="/assests/include/end-html.jsp" %>
 

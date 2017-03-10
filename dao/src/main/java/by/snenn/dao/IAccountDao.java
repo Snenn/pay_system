@@ -1,14 +1,12 @@
 package by.snenn.dao;
 
-import by.snenn.pojos.Account;
-
 import java.util.List;
 
-public interface IAccountDao<T> extends IDao<T> {
+public interface IAccountDao<TYPE> extends IDao<TYPE> {
 
-    List<Account> getAll();
+    List<TYPE> getAll();
 
-    Account readByFKUser(int id);
+    TYPE readByFKUser(int id);
 
-    Account getLastPost() ;
+    TYPE getLastPost() ;
 }

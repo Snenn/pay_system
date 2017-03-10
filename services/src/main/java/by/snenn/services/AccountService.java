@@ -18,13 +18,13 @@ public class AccountService implements IAccountService {
     private Logger logger= Logger.getLogger(AccountService.class.getName());
     private String messages = null;
 
-    @Autowired
-    private IAccountDao accountDao;
+
     @Autowired
     private ICreditCardDao creditCardDao;
     @Autowired
     private ICreditCardStatusDao creditCardStatusDao;
-
+    @Autowired
+    private IAccountDao accountDao;
 
     @Override
     public String resetAccountUser(User user) {

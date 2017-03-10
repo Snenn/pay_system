@@ -1,16 +1,15 @@
 package by.snenn.dao;
 
-import by.snenn.pojos.User;
-
 import java.util.List;
 
 
-public interface IUserDao<Type> extends IDao<Type> {
-    List<Type> getAll() ;
+public interface IUserDao<TYPE> extends IDao<TYPE> {
+    List<TYPE> getAll() ;
 
-    public User getUserByLogin(String login, String password) throws Exception ;
+    public TYPE getUserByLogin(String login, String password) throws Exception ;
 
-    public User getLastPost();
+    public TYPE getLastPost();
 
+    TYPE findByLogin(String login);
 
 }

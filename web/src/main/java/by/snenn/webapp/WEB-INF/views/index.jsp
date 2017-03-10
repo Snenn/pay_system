@@ -2,7 +2,7 @@
 <%@ include file="/assests/include/begin-html.jsp" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 
-<form class="form-horizontal" action="/web/logIn" method="POST">
+<form class="form-horizontal" action="/web/logIn" method="get">
     <fieldset>
 
         <!-- Form Name -->

@@ -7,11 +7,7 @@
     <link href="assests/css/bootstrap.css" rel="stylesheet" />
     <script src="assests/js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <style>
-        body {
-            background-image: url("background.jpg");
-        }
-    </style>
+
 
 <body>
 

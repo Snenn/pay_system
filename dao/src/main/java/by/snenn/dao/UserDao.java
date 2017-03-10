@@ -3,8 +3,10 @@ package by.snenn.dao;
 
 import by.snenn.pojos.User;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,7 +38,7 @@ public class UserDao extends Dao<User> implements IUserDao<User>{
     public User getUserByLogin(String login, String password) throws Exception {
         User user = new User();
         try {
-            Query query = getSession().createSQLQuery("FROM user WHERE u.login=:login and password=:password");
+            Query query = getSession().createQuery("from User u where u.login = :login and u.password = :password");
             query.setParameter("login",login).setParameter("password",password);
             user = (User) query.uniqueResult();
             logger.info("get user" + user);
@@ -55,5 +57,11 @@ public class UserDao extends Dao<User> implements IUserDao<User>{
             logger.error("Error get user" + e);
         }
         return user;
+    }
+
+    public User findByLogin(String login) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("login", login));
+        return (User) criteria.uniqueResult();
     }
 }

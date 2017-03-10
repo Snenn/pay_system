@@ -2,7 +2,7 @@ package by.snenn.services;
 
 
 import by.snenn.dao.IUserDao;
-import by.snenn.dao.UserDao;
+import by.snenn.dao.IUserRoleDao;
 import by.snenn.pojos.User;
 import by.snenn.pojos.UserRole;
 import org.apache.log4j.Logger;
@@ -17,16 +17,27 @@ public class UserService implements IUserService{
     private String messages;
     private User user;
 
+    @Autowired
+    IUserDao userDao;
+    @Autowired
+    IUserRoleDao userRoleDao;
 
+    @Override
+    public void saveOrUpdate(User user) {
+        try {
+            userDao.saveOrUpdate(user);
+        } catch (Exception e) {
+            logger.error("Error saveOrUpdate in UserService: " + e);
+        }
+    }
 
     @Override
     public User loginUser(String login, String password) {
         try {
-//            user=userDao.getUserByLogin(login, password);
-            logger.info("surname user: "+user.getSurname());
-
+            user = (User) userDao.getUserByLogin(login, password);
+            logger.info("get user: "+user.getSurname());
         } catch (Exception ignored) {
-            logger.error("Error1");
+            logger.error("Error1"+user);
         }
         return user;
     }
@@ -44,4 +55,15 @@ public class UserService implements IUserService{
         }
         return messages;
     }
+
+    @Override
+    public UserRole getRoleUser() throws Exception {
+        return (UserRole) userRoleDao.get(1);
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return (User) userDao.findByLogin(login);
+    }
+
 }
