@@ -1,5 +1,6 @@
 package by.snenn.controller;
 
+import by.snenn.Command.Messages;
 import by.snenn.pojos.User;
 import by.snenn.pojos.UserRole;
 import by.snenn.services.IUserService;
@@ -26,13 +27,15 @@ IUserService userService;
     }
 
     @RequestMapping(value = {"/signUp"}, method = RequestMethod.POST)
-    public String addUser(@ModelAttribute("userForm") User user,
+    public String addUser(ModelMap model, @ModelAttribute("userForm") User user,
                           HttpServletRequest request) throws Exception {
         user.setAccounts(null);
         UserRole userRole=userService.getRoleUser();
         user.setUserRole(userRole);
         userService.saveOrUpdate(user);
-        return "redirect:../home";
+        model.put(Messages.msgMessage, "successful");
+        model.put("jsp_error", "successful");
+        return "redirect:../login";
     }
 
 

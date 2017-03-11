@@ -20,7 +20,7 @@ public class CreditCard implements Serializable {
     private int id;
     @Column
     private int creditCardStatus;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private Account account;
     @Column

@@ -15,8 +15,8 @@ public class Form {
     }
 
 
-    static int getInt(HttpServletRequest req,
-                      String parameter) throws ParseException {
+    public static int getInt(HttpServletRequest req,
+                             String parameter) throws ParseException {
         String value=req.getParameter(parameter);
         if (value != null) {
             if (value.matches("[0-9-]+"))

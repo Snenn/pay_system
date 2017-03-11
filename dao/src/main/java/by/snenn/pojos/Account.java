@@ -1,8 +1,10 @@
 package by.snenn.pojos;
 
 
-
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,8 +25,9 @@ public class Account implements Serializable{
     @Column
     private int balance;
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "account", orphanRemoval = true)
     private List<CreditCard> creditCards = new ArrayList<>();

@@ -9,8 +9,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-@Transactional
+
 @Service
+@Transactional
 public class UserService implements IUserService{
 
     private Logger logger= Logger.getLogger(UserService.class.getName());
@@ -60,6 +61,7 @@ public class UserService implements IUserService{
     public UserRole getRoleUser() throws Exception {
         return (UserRole) userRoleDao.get(1);
     }
+
 
     @Override
     public User findByLogin(String login) {

@@ -48,19 +48,19 @@ public class myAuthenticationSuccessHandler implements AuthenticationSuccessHand
         Collection<? extends GrantedAuthority> authorities
                 = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("admin")) {
+            if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 isAdmin = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("user")) {
+            } else if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
                 isUser = true;
                 break;
             }
         }
 
         if (isAdmin) {
-            return "admin";
+            return "/admin";
         } else if (isUser) {
-            return "user";
+            return "/user";
         } else {
             throw new IllegalStateException();
         }

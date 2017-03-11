@@ -5,7 +5,7 @@
 
     <definition name="default" template="/WEB-INF/views/main.jsp"/>
 
-    <definition name="home" template="/WEB-INF/views/logIn.jsp"/>
+    <definition name="login" template="/WEB-INF/views/login.jsp"/>
 
     <definition name="reg" template="/WEB-INF/views/signup.jsp"/>
 

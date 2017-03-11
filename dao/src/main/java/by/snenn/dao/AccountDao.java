@@ -36,7 +36,7 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
     public Account readByFKUser(int id) {
         Account account = new Account();
         try {
-                Query query = getSession().createSQLQuery("select FROM ACCOUNT WHERE user.id=:id ");
+                Query query = getSession().createQuery("from Account where user.id=:id");
                 query.setParameter("id",id);
                 account = (Account) query.uniqueResult();
             } catch (HibernateException e) {
