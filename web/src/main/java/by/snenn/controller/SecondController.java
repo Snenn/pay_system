@@ -1,6 +1,6 @@
 package by.snenn.controller;
 
-import by.snenn.Command.Messages;
+import by.snenn.controller.Util.Messages;
 import by.snenn.pojos.User;
 import by.snenn.pojos.UserRole;
 import by.snenn.services.IUserService;

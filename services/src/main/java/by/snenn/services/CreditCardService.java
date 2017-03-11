@@ -58,16 +58,17 @@ public class CreditCardService implements ICreditCardService {
     public String blockCard(int idCard) {
 
         try {
+            if (existCard(idCard)>=0) {
             creditCard = (CreditCard) creditCardDao.get(idCard);
             logger.info("get creditCard : " +creditCard.getCreditCardStatus()+"  "+ creditCard);
-            if (creditCard.getCreditCardStatus()==1) {
-                logger.info("set status");
-                creditCard.setCreditCardStatus(2);
-                creditCardDao.saveOrUpdate(creditCard);
-                logger.info("blok creditCard : "+creditCard);
-                messages="succefull";
-            }  else messages= "Credit card is already locked";
-
+                if (creditCard.getCreditCardStatus() == 1) {
+                    logger.info("set status");
+                    creditCard.setCreditCardStatus(2);
+                    creditCardDao.saveOrUpdate(creditCard);
+                    logger.info("blok creditCard : " + creditCard);
+                    messages = "succefull";
+                } else messages = "Credit card is already locked";
+            } else messages="the credit card does not exist";
         } catch (Exception e) {
             logger.error("Error1" + creditCard);
         }
@@ -78,13 +79,14 @@ public class CreditCardService implements ICreditCardService {
     @Override
     public String unlockCard(int idCard) {
         try {
+            if (existCard(idCard)>=0) {
             creditCard = (CreditCard) creditCardDao.get(idCard);
-            if (creditCard.getCreditCardStatus()==2) {
-                creditCard.setCreditCardStatus(1);
-                creditCardDao.saveOrUpdate(creditCard);
-                messages="succefull";
-            }  else messages= "Credit card is already unlocked";
-
+                    if (creditCard.getCreditCardStatus()==2) {
+                    creditCard.setCreditCardStatus(1);
+                    creditCardDao.saveOrUpdate(creditCard);
+                    messages="succefull";
+                }  else messages= "Credit card is already unlocked";
+            } else messages="the credit card does not exist";
         } catch (Exception e) {
             logger.error("Error1");
         }
@@ -102,7 +104,6 @@ public class CreditCardService implements ICreditCardService {
                 idCardList.add(creditCard.getId());
             }
             result=idCardList.indexOf(id);
-            System.out.println("exist"+result);
         } catch (Exception ignored) {
             logger.error("Error1");
         }

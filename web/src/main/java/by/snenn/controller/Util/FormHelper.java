@@ -1,4 +1,4 @@
-package by.snenn.Command;
+package by.snenn.controller.Util;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;

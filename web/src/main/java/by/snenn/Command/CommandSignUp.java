@@ -1,6 +1,9 @@
 package by.snenn.Command;
 
 
+import by.snenn.controller.Util.Form;
+import by.snenn.controller.Util.Messages;
+import by.snenn.controller.Util.Patterns;
 import by.snenn.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

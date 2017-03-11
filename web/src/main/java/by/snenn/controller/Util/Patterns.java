@@ -1,4 +1,4 @@
-package by.snenn.Command;
+package by.snenn.controller.Util;
 
 public interface Patterns {
     String LOGIN="[а-яА-ЯёЁa-zA-Z0-9-_.]+";

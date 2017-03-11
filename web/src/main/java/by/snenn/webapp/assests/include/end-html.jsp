@@ -6,10 +6,7 @@
 
 <footer class="navbar-fixed-bottom row-fluid">
   <div class="container">
-    <div id="bottom_message"><p>${jsp_error}</p></div>
-    <p><span style="color: darkred; ">${jsp_message}  </span></p>
-${jsp_message}
-
+    <p>${jsp_error}</p><p><span style="color: darkred; ">${jsp_message}  </span></p>
   </div>
 </footer>
 
