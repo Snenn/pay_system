@@ -112,52 +112,50 @@ public class CreditCardService implements ICreditCardService {
 
     @Override
     public String payOrderUser(User user, int idSender, int sum) {
-        try {
+        if (verifyCardByUser(user, idSender) >= 0) {
+            try {
             CreditCard creditCardSender= (CreditCard) creditCardDao.get(idSender);
             Account account= (Account) accountDao.get(creditCardSender.getAccount().getId());
             if (creditCardSender.getCreditCardStatus()==1) {
-                if (verifyCardByUser(user, idSender) >= 0) {
                     if (account.getBalance() >= sum) {
                         account.setBalance(account.getBalance() - sum);
                         accountDao.saveOrUpdate(account);
                         messages = "successful";
                     } else messages = "insufficient funds";
-                } else messages = "you card with this id does not belong";
             }
-
             if (creditCardSender.getCreditCardStatus()==2) messages="Credit card is blocked";
         } catch (Exception e) {
             logger.error("Error1");
         }
+        } else messages = "you card with this id does not belong";
         return messages;
     }
 
     @Override
     public String transferMoneyUser(User user, int idSender, int idRecipient, int sum) {
-        try {
-            CreditCard creditCardSender= (CreditCard) creditCardDao.get(idSender);
-            Account accountSender= (Account) accountDao.get(creditCardSender.getAccount().getId());
-            CreditCard creditCardRecipient= (CreditCard) creditCardDao.get(idRecipient);
-            Account accountRecipient= (Account) accountDao.get(creditCardRecipient.getAccount().getId());
-            if (creditCardSender.getCreditCardStatus()==1) {
-                if (creditCardRecipient.getCreditCardStatus() == 1) {
-                    if (verifyCardByUser(user, idSender) >= 0) {
-                        if (existCard(idRecipient) >= 0) {
-
-                            if (accountSender.getBalance() >= sum) {
-                                accountSender.setBalance(accountSender.getBalance() - sum);
-                                accountRecipient.setBalance(accountRecipient.getBalance() + sum);
-                                accountDao.saveOrUpdate(accountRecipient);
-                                accountDao.saveOrUpdate(accountSender);
-                                messages = "successful";
-                            } else messages = "insufficient funds";
-                        } else messages = "the sender's credit card does not exist";
-                    } else messages = "you card with this id does not belong";
-                } if (creditCardRecipient.getCreditCardStatus()==2) messages="Recipient's credit card is blocked";
-            } if (creditCardSender.getCreditCardStatus()==2) messages="Sender's credit card is blocked";
-        } catch (Exception e) {
-            logger.error("Error1");
-        }
+        if (verifyCardByUser(user, idSender) >= 0) {
+            if (existCard(idRecipient) >= 0) {
+                try {
+                    CreditCard creditCardSender= (CreditCard) creditCardDao.get(idSender);
+                    Account accountSender= (Account) accountDao.get(creditCardSender.getAccount().getId());
+                    CreditCard creditCardRecipient= (CreditCard) creditCardDao.get(idRecipient);
+                    Account accountRecipient= (Account) accountDao.get(creditCardRecipient.getAccount().getId());
+                    if (creditCardSender.getCreditCardStatus()==1) {
+                        if (creditCardRecipient.getCreditCardStatus() == 1) {
+                                    if (accountSender.getBalance() >= sum) {
+                                        accountSender.setBalance(accountSender.getBalance() - sum);
+                                        accountRecipient.setBalance(accountRecipient.getBalance() + sum);
+                                        accountDao.saveOrUpdate(accountRecipient);
+                                        accountDao.saveOrUpdate(accountSender);
+                                        messages = "successful";
+                                    } else messages = "insufficient funds";
+                        } if (creditCardRecipient.getCreditCardStatus()==2) messages="Recipient's credit card is blocked";
+                    } if (creditCardSender.getCreditCardStatus()==2) messages="Sender's credit card is blocked";
+                } catch (Exception e) {
+                    logger.error("Error1");
+                }
+            } else messages = "the sender's credit card does not exist";
+        } else messages = "you card with this id does not belong";
         return messages;
     }
 
@@ -177,5 +175,21 @@ public class CreditCardService implements ICreditCardService {
             logger.error("Error1");
         }
         return result;
+    }
+
+    @Override
+    public String createCreditCard(Account account) {
+
+        try {
+            List creditCards =creditCardDao.getAllByIdAccount(account.getId());
+            if (creditCards.size()<=2){
+            CreditCard creditCard= new CreditCard(1,account,1);
+            creditCardDao.saveOrUpdate(creditCard);
+            messages="Credit card created";}
+            else messages="you have 3 card";
+        } catch (Exception e) {
+            messages="Credit card hasn't created";
+        }
+        return messages;
     }
 }

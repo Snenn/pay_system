@@ -33,8 +33,8 @@ IUserService userService;
         UserRole userRole=userService.getRoleUser();
         user.setUserRole(userRole);
         userService.saveOrUpdate(user);
-        model.put(Messages.msgMessage, "successful");
-        model.put("jsp_error", "successful");
+        model.put(Messages.msgError, "successful");
+        model.addAttribute(Messages.msgError, "successful");
         return "redirect:../login";
     }
 

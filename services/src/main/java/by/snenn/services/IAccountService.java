@@ -16,5 +16,7 @@ public interface IAccountService {
 
     List viewCreditCardStatusesForAccount();
 
+    String createAccount(User user);
 
+    String putMoney(User user, int sum);
 }

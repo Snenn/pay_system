@@ -128,26 +128,34 @@
     <index id="44" parent="19" name="FKornjrxhaf4lca2hhfgrap3jy3">
       <ColNames>userRole_idRoleUser</ColNames>
     </index>
-    <key id="45" parent="19" name="PRIMARY">
+    <index id="45" parent="19" name="user_login_uindex">
+      <ColNames>login</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="46" parent="19" name="PRIMARY">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="46" parent="19" name="FKornjrxhaf4lca2hhfgrap3jy3">
+    <key id="47" parent="19" name="user_login_uindex">
+      <ColNames>login</ColNames>
+      <UnderlyingIndexName>user_login_uindex</UnderlyingIndexName>
+    </key>
+    <foreign-key id="48" parent="19" name="FKornjrxhaf4lca2hhfgrap3jy3">
       <ColNames>userRole_idRoleUser</ColNames>
       <RefSchemaName>bank</RefSchemaName>
       <RefTableName>user_role</RefTableName>
       <RefColNames>idRoleUser</RefColNames>
     </foreign-key>
-    <column id="47" parent="20" name="idRoleUser">
+    <column id="49" parent="20" name="idRoleUser">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="48" parent="20" name="nameRoleUser">
+    <column id="50" parent="20" name="nameRoleUser">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <key id="49" parent="20" name="PRIMARY">
+    <key id="51" parent="20" name="PRIMARY">
       <ColNames>idRoleUser</ColNames>
       <Primary>1</Primary>
     </key>

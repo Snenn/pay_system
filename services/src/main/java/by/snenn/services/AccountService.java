@@ -29,7 +29,7 @@ public class AccountService implements IAccountService {
     @Override
     public String resetAccountUser(User user) {
         try {
-            Account account= (Account) accountDao.get(user.getId());
+            Account account= (Account) accountDao.readByFKUser(user.getId());
             if (account.getBalance()==0) {
                 accountDao.delete(account);
                 messages="successful";
@@ -54,6 +54,37 @@ public class AccountService implements IAccountService {
     @Override
     public List viewCreditCardStatusesForAccount() {
         return creditCardStatusDao.getAll();
+    }
+
+    @Override
+    public String createAccount(User user) {
+
+        try {
+            if (accountDao.readByFKUser(user.getId())==null){
+            Account account=new Account(0, user, null);
+            accountDao.saveOrUpdate(account);}
+            else messages="you have account";
+        }
+        catch (Exception e) {
+            logger.error("Error2");
+        }
+        return messages;
+    }
+
+    @Override
+    public String putMoney(User user, int sum) {
+
+        try {
+            Account account= (Account) accountDao.readByFKUser(user.getId());
+            account.setBalance(sum+account.getBalance());
+            accountDao.saveOrUpdate(account);
+        } catch (Exception e) {
+            logger.error("Error3");
+            messages="error";
+        }
+        messages="successful";
+
+        return messages;
     }
 }
 

@@ -1,6 +1,7 @@
 package by.snenn.services;
 
 
+import by.snenn.pojos.Account;
 import by.snenn.pojos.User;
 
 public interface ICreditCardService {
@@ -23,5 +24,5 @@ public interface ICreditCardService {
     int verifyCardByUser(User user, int id);
 
 
-
+    String createCreditCard(Account account);
 }

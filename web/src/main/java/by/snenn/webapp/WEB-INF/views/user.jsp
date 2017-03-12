@@ -7,7 +7,6 @@
    <div class="row">
     <b>
         <br>
-        <div class=col-md-2 style="text-align: center"></div>
         <div class=col-md-1 style="text-align: center">ID</div>
         <div class=col-md-2 style="text-align: center">Login</div>
         <div class=col-md-2 style="text-align: center">ID Account</div>
@@ -22,13 +21,20 @@
 
 <div class="row">
     <b>
-            <div class=col-md-2 style="text-align: center"></div>
             <div class=col-md-1 style="text-align: center">${user.id}</div>
             <div class=col-md-2 style="text-align: center">${user.login}</div>
             <div class=col-md-2 style="text-align: center"><c:if test="${account.id!=null}">${account.id}</c:if></div>
             <div class=col-md-2 style="text-align: center"><c:if test="${account.id!=null}">${account.balance}</c:if></div>
 
-            <div class=col-md-1 style="text-align: center"><input type="submit" name="resetAccount" value="reset" /></div>
+            <c:if test="${account.id!=null}">
+                <div class=col-md-1 style="text-align: center"><input type="submit" name="resetAccount" value="reset this account" /></div><b></b>
+                <label for="sumPutMoney"></label><input id="sumPutMoney" name="sumPutMoney" type="text" ><input type="submit" name="putMoney" value="put money" />
+            </c:if>
+
+            <div class=col-md-1 style="text-align: center"><c:if test="${account.id==null}">
+                <input type="submit" name="createAccount" value="create new account" />
+            </c:if></div>
+
             <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
 
 
@@ -38,7 +44,7 @@
 <br>
 
     <div style="text-align: center;"><span style="font-size: x-large; font-weight: 300 "  align="center"><span
-            style="color: black; "> Credit cards list</span></span></div>
+            style="color: black; "> Credit cards list    </span></span></div>
     <br>
 
     <div class="row">
@@ -47,15 +53,17 @@
             <div class=col-md-3 style="text-align: center">BALANCE</div>
             <div class=col-md-3 style="text-align: center">ID ACCOUNT</div>
             <div class=col-md-3 style="text-align: center">STATUS CreditCard</div>
+
+
         </b>
     </div>
+
     <br>
 
 
 <c:forEach items="${creditCards}" var="creditCard">
     <div class="row">
         <c:if test="${creditCards!=null}">
-        <form class="form-creditCard-${creditCard.id}" action="do?command=MAINUSER" method=POST>
             <div class=col-md-2 style="text-align: center">${creditCard.id}</div>
             <div class=col-md-3 style="text-align: center">${account.balance}</div>
             <div class=col-md-3 style="text-align: center">${creditCard.account.id}</div>
@@ -70,13 +78,18 @@
             </div>
 
 
-        </form>
         </c:if>
     </div>
     <br>
 </c:forEach>
+    <form action="/user" method=POST>
+    <div class="row">
+        <div class=col-md-1 style="text-align: center"></div>
+        <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+        <input type="submit" name="createCreditCard" value="create new Credit Card" />
+    </div>
+    </form>
 <br>
-
 
 </div>
 
