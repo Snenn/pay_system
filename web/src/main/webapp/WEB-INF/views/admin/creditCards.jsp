@@ -1,8 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ include file="../../../resourses/include/begin-html.jsp" %>
+<%@ include file="../../../WEB-INF/views/admin/admin.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib tagdir="/WEB-INF/tags/menu" prefix="menu" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 
+<div class="container" style="margin-top: 30px">
+
+    <div STYLE="border-radius: 4px; background-color: ghostwhite; width: 750px;  height: 530px; float: right">
 
 <div>
 
@@ -32,8 +35,10 @@
             <br>
         </c:forEach>
         <t:paginator step="8" count="${adCount}" urlprefix="?&startNumber="></t:paginator>
-        <div style="text-align: center;"><form action="/admin" method="POST"><div><label for="idCard"></label><input style="text-align: center" id="idCard" placeholder="Enter Credit Card ID" name="idCard" type="text" required=""></div>
-            <br>
+        <div style="text-align: center;">
+            <form action="/admin/cr" method="POST"><div><label for="idCard"></label><input style="text-align: center" id="idCard" placeholder="Enter Credit Card ID" name="idCard" type="text" required=""></div>
+            <ajax event="click" render="creditCards"></ajax>
+                <br>
             <jsp:useBean id="startIndex" scope="request" type="java.lang.Integer"/>
             <input type="hidden" id="startIndex" name="startIndex" value="${startIndex}"/>
             <button class="btn btn-danger" type="submit" name="block" >Block Credit Card</button>    <button class="btn btn-success" type="submit" name="unlock" >Unlock Credit Card</button>
@@ -42,3 +47,16 @@
     </div>
 
 </div>
+
+    </div>
+
+    <%@ include file="../../../WEB-INF/views/admin/leftData.jsp" %>
+
+
+
+
+
+</div>
+<br>
+<%@ include file="../../../resourses/include/end-html.jsp" %>
+</html>

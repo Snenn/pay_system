@@ -13,21 +13,22 @@
 
                 <br><div class="row" style="margin-top: 20px">
                 <b>
-                    <div class=col-md-3 style="text-align: center">ID User</div>
-                    <div class=col-md-3 style="text-align: center">Login</div>
-                    <div class=col-md-3 style="text-align: center">Surname</div>
-                    <div class=col-md-3 style="text-align: center">Name</div>
+                    <div class=col-md-2 style="text-align: center">ID Transfer</div>
+                    <div class=col-md-2 style="text-align: center">Sum</div>
+                    <div class=col-md-2 style="text-align: center">Sender</div>
+                    <div class=col-md-2 style="text-align: center">Recipient</div>
+                    <div class=col-md-4 style="text-align: center">Data</div>
 
                 </b>
             </div>
                 <br>
-                <c:forEach var="user" items="${users}" >
+                <c:forEach var="transfer" items="${transfers}" >
                     <div class="row">
-                        <div class=col-md-3 style="text-align: center">${user.getId()}</div>
-                        <div class=col-md-3 style="text-align: center">${user.getLogin()}</div>
-                        <div class=col-md-3 style="text-align: center">${user.getSurname()}</div>
-                        <div class=col-md-3 style="text-align: center">${user.getName()}</div>
-
+                        <div class=col-md-2 style="text-align: center">${transfer.getId()}</div>
+                        <div class=col-md-2 style="text-align: center">${transfer.getSum()}</div>
+                        <div class=col-md-2 style="text-align: center">${transfer.getIdCardSender()}</div>
+                        <div class=col-md-2 style="text-align: center">${transfer.getIdCardRecipient()}</div>
+                        <div class=col-md-4 style="text-align: center">${transfer.getData()}</div>
                     </div>
                     <br>
                 </c:forEach>

@@ -87,6 +87,16 @@ public class AccountService implements IAccountService {
 
         return messages;
     }
+
+    @Override
+    public List getAccountsLimit(int startNumber, int countFields) {
+        return (List<Account>) accountDao.getAllLimit(startNumber, countFields);
+    }
+
+    @Override
+    public int getCountAccounts() {
+        return accountDao.getCount();
+    }
 }
 
 

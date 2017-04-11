@@ -75,10 +75,10 @@ public class UserController {
         if (req.getParameter("transfer") != null) {
             String messages = null;
             try {
-                messages = creditCardService.transferMoneyUser(user,
-                        Integer.parseInt(Form.getString(req.getParameter("idCardSenderTransfer"), Patterns.NUMBER)),
-                        Integer.parseInt(Form.getString(req.getParameter("idCardRecipientTransfer"), Patterns.NUMBER)),
-                        Integer.parseInt(Form.getString(req.getParameter("sumTransfer"), Patterns.NUMBER)));
+                int idCardSender = Integer.parseInt(Form.getString(req.getParameter("idCardSenderTransfer"), Patterns.NUMBER));
+                int idCardRecipient= Integer.parseInt(Form.getString(req.getParameter("idCardRecipientTransfer"), Patterns.NUMBER));
+                int sum = Integer.parseInt(Form.getString(req.getParameter("sumTransfer"), Patterns.NUMBER));
+                messages = creditCardService.transferMoneyUser(user,idCardSender,idCardRecipient,sum);
             } catch (ParseException e) {
                 model.addAttribute(Messages.msgError, "Invalid input!!!");
                 logger.error("Error1, Invalid input");
@@ -89,9 +89,9 @@ public class UserController {
         if (req.getParameter("pay") != null) {
             String messages = null;
             try {
-                messages = creditCardService.payOrderUser(user,
-                        Integer.parseInt(Form.getString(req.getParameter("idCardSenderPay"), Patterns.NUMBER)),
-                        Integer.parseInt(Form.getString(req.getParameter("sumPay"), Patterns.NUMBER)));
+                int idCard = Integer.parseInt(Form.getString(req.getParameter("idCardSenderPay"), Patterns.NUMBER));
+                int sum = Integer.parseInt(Form.getString(req.getParameter("sumPay"), Patterns.NUMBER));
+                messages = creditCardService.payOrderUser(user, idCard, sum);
             } catch (ParseException e) {
                 model.addAttribute(Messages.msgError, "Invalid input!!!");
                 logger.error("Error1, Invalid input");            }

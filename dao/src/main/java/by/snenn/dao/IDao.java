@@ -11,4 +11,5 @@ public interface IDao<TYPE> {
 
     TYPE get(Serializable id) throws Exception;
 
+
 }

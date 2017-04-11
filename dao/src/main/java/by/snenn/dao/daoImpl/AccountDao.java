@@ -3,6 +3,7 @@ package by.snenn.dao.daoImpl;
 import by.snenn.dao.IAccountDao;
 import by.snenn.pojos.Account;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -59,6 +60,34 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
 
         }
         return account;
+    }
+
+    @Override
+    public List<Account> getAllLimit(int startNumber, int countFields) {
+        List<Account> accounts = null;
+        try {
+            Criteria cr = getSession().createCriteria(Account.class);
+            cr.setFirstResult(startNumber);
+            cr.setMaxResults(countFields);
+            accounts = cr.list();
+        } catch (HibernateException e) {
+            logger.error("Error get Accounts" + e);
+        }
+        return  accounts;
+    }
+
+    @Override
+    public int getCount() {
+        int result=0;
+        try {
+            Query query = getSession().createQuery("select count (*) FROM Account");
+            result = Integer.parseInt(String.valueOf(query.uniqueResult()));
+
+        } catch (HibernateException e) {
+            logger.error("Error get count Account" + e);
+        }
+
+        return result;
     }
 
 

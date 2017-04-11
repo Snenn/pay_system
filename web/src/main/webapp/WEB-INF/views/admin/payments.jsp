@@ -13,20 +13,20 @@
 
                 <br><div class="row" style="margin-top: 20px">
                 <b>
-                    <div class=col-md-3 style="text-align: center">ID User</div>
-                    <div class=col-md-3 style="text-align: center">Login</div>
-                    <div class=col-md-3 style="text-align: center">Surname</div>
-                    <div class=col-md-3 style="text-align: center">Name</div>
+                    <div class=col-md-3 style="text-align: center">ID Payment</div>
+                    <div class=col-md-3 style="text-align: center">Sum</div>
+                    <div class=col-md-3 style="text-align: center">ID Card</div>
+                    <div class=col-md-3 style="text-align: center">Data</div>
 
                 </b>
             </div>
                 <br>
-                <c:forEach var="user" items="${users}" >
+                <c:forEach var="payment" items="${payments}" >
                     <div class="row">
-                        <div class=col-md-3 style="text-align: center">${user.getId()}</div>
-                        <div class=col-md-3 style="text-align: center">${user.getLogin()}</div>
-                        <div class=col-md-3 style="text-align: center">${user.getSurname()}</div>
-                        <div class=col-md-3 style="text-align: center">${user.getName()}</div>
+                        <div class=col-md-3 style="text-align: center">${payment.getId()}</div>
+                        <div class=col-md-3 style="text-align: center">${payment.getSum()}</div>
+                        <div class=col-md-3 style="text-align: center">${payment.getIdCreditCard()}</div>
+                        <div class=col-md-3 style="text-align: center">${payment.getData()}</div>
 
                     </div>
                     <br>

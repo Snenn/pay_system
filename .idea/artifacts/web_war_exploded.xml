@@ -1,12 +1,16 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="web:war exploded">
-    <output-path>$PROJECT_DIR$/web/target/web</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/web_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="web" />
+          <element id="module-output" name="dao" />
+          <element id="module-output" name="pay_system" />
+          <element id="module-output" name="services" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="MigLayout" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:4.0.3.RELEASE" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:4.0.3.RELEASE" />
@@ -28,7 +32,6 @@
           <element id="library" level="project" name="Maven: javax.mail:javax.mail-api:1.5.5" />
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.5" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
-          <element id="library" level="project" name="Maven: javax.servlet:jsp-api:2.0" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.codehaus.mojo:cobertura-maven-plugin:2.7" />
           <element id="library" level="project" name="Maven: net.sourceforge.cobertura:cobertura:2.1.1" />
@@ -41,9 +44,9 @@
           <element id="library" level="project" name="Maven: org.apache.ant:ant:1.8.3" />
           <element id="library" level="project" name="Maven: org.apache.ant:ant-launcher:1.8.3" />
           <element id="library" level="project" name="Maven: org.apache.ant:ant-junit:1.8.3" />
-          <element id="library" level="project" name="Maven: org.mortbay.jetty:servlet-api-2.5:6.1.14" />
           <element id="library" level="project" name="Maven: org.mortbay.jetty:jetty:6.1.14" />
           <element id="library" level="project" name="Maven: org.mortbay.jetty:jetty-util:6.1.14" />
+          <element id="library" level="module" name="Maven: com.sun:tools:0" module-name="web" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.0.13" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.0.13" />
           <element id="library" level="project" name="Maven: xerces:xercesImpl:2.11.0" />
@@ -143,9 +146,6 @@
           <element id="library" level="project" name="Maven: org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1" />
           <element id="library" level="project" name="Maven: commons-validator:commons-validator:1.4.0" />
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
-          <element id="archive" name="services-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="services" />
-          </element>
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.2.6.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" />
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
@@ -182,14 +182,10 @@
           <element id="library" level="project" name="Maven: cglib:cglib:3.2.4" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.38" />
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:2.5.1" />
-          <element id="archive" name="dao-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="dao" />
-          </element>
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.1.0.Final" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator-annotation-processor:4.1.0.Final" />
           <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
           <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
-          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.0" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: org.apache.tiles:tiles-core:3.0.5" />
@@ -211,9 +207,6 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.3" />
           <element id="library" level="project" name="Maven: javax.faces:jsf-api:2.1" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/web/target/web/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="web/web/PWeb" />
     </root>

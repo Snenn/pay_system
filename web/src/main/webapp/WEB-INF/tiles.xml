@@ -15,9 +15,20 @@
 
     <definition name="admin" template="/WEB-INF/views/admin/main.jsp"/>
 
+    <definition name="home1" template="/WEB-INF/views/home.jsp"/>
+
+    <definition name="adminCreditCards" template="/WEB-INF/views/admin/creditCards.jsp"/>
+
     <definition name="adminUsers" template="/WEB-INF/views/admin/users.jsp"/>
 
-    <definition name="home1" template="/WEB-INF/views/home.jsp"/>
+    <definition name="adminAccounts" template="/WEB-INF/views/admin/accounts.jsp"/>
+
+    <definition name="adminPayments" template="/WEB-INF/views/admin/payments.jsp"/>
+
+    <definition name="adminTransfers" template="/WEB-INF/views/admin/transfers.jsp"/>
+
+
+
 
 
 

@@ -44,7 +44,7 @@ public class UserDao extends Dao<User> implements IUserDao<User> {
             cr.setMaxResults(endNumber);
             users = cr.list();
         } catch (HibernateException e) {
-            logger.error("Error get CreditCards" + e);
+            logger.error("Error get Users" + e);
         }
         return  users;
     }

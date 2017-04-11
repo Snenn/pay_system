@@ -3,6 +3,11 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib tagdir="/WEB-INF/tags/menu" prefix="menu" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
+<script src="http://code.jquery.com/jquery-1.10.2.js"
+        type="text/javascript"></script>
+<script src="js/app-ajax.js" type="text/javascript"></script>
 <e:url value="/j_spring_security_check" var="loginUrl" />
 <head >
     <meta http-equiv="Cache-Control" content="no-cache">
@@ -56,3 +61,4 @@
 
 
 </div>
+</body>

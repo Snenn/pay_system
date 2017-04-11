@@ -1,11 +1,15 @@
 package by.snenn.services.daoImpl;
 
 
-import by.snenn.dao.*;
+import by.snenn.dao.IAccountDao;
+import by.snenn.dao.ICreditCardDao;
+import by.snenn.dao.ICreditCardStatusDao;
 import by.snenn.pojos.Account;
 import by.snenn.pojos.CreditCard;
 import by.snenn.pojos.User;
 import by.snenn.services.ICreditCardService;
+import by.snenn.services.IPaymentService;
+import by.snenn.services.ITransferService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +33,10 @@ public class CreditCardService implements ICreditCardService {
     private ICreditCardDao creditCardDao;
     @Autowired
     private ICreditCardStatusDao creditCardStatusDao ;
-
+    @Autowired
+    private IPaymentService paymentService;
+    @Autowired
+    private ITransferService transferService;
 
 
     @Override
@@ -124,6 +131,7 @@ public class CreditCardService implements ICreditCardService {
                         account.setBalance(account.getBalance() - sum);
                         accountDao.saveOrUpdate(account);
                         messages = "successful";
+                        paymentService.createPayment(idSender, sum);
                     } else messages = "insufficient funds";
             }
             if (creditCardSender.getCreditCardStatus()==2) messages="Credit card is blocked";
@@ -151,6 +159,7 @@ public class CreditCardService implements ICreditCardService {
                                         accountDao.saveOrUpdate(accountRecipient);
                                         accountDao.saveOrUpdate(accountSender);
                                         messages = "successful";
+                                        transferService.createTransfer(idSender,idRecipient,sum);
                                     } else messages = "insufficient funds";
                         } if (creditCardRecipient.getCreditCardStatus()==2) messages="Recipient's credit card is blocked";
                     } if (creditCardSender.getCreditCardStatus()==2) messages="Sender's credit card is blocked";
@@ -203,6 +212,7 @@ public class CreditCardService implements ICreditCardService {
     public int getCountCreditCards() {
         return creditCardDao.getCount();
     }
+
 
     public List getAllcreditCardsStatus() {
         return creditCardStatusDao.getAll();

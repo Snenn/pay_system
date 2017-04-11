@@ -19,4 +19,8 @@ public interface IAccountService {
     String createAccount(User user);
 
     String putMoney(User user, int sum);
+
+    List getAccountsLimit(int startNumber, int countFields);
+
+    int getCountAccounts();
 }
