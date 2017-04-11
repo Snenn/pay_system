@@ -1,0 +1,44 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib tagdir="/WEB-INF/tags/menu" prefix="menu" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
+
+
+<div>
+
+    <div class="container-fluid">
+
+        <br><div class="row" style="margin-top: 20px">
+            <b>
+                <div class=col-md-4 style="text-align: center">ID CreditCard</div>
+                <div class=col-md-4 style="text-align: center">ID ACCOUNT</div>
+                <div class=col-md-4 style="text-align: center">STATUS CreditCard</div>
+            </b>
+        </div>
+        <br>
+        <c:forEach var="creditCard" items="${creditCards}" >
+            <div class="row">
+                    <div class=col-md-4 style="text-align: center">${creditCard.getId()}</div>
+                    <div class=col-md-4 style="text-align: center">${creditCard.getAccount().getId()}</div>
+                    <div class=col-md-4 style="text-align: center">
+                        <c:forEach items="${creditCardStatuses}" var="creditCardStatus">
+                            <c:if test="${creditCardStatus.getId()==creditCard.getCreditCardStatus()}">
+                                ${creditCardStatus.getStatus()}
+                            </c:if>
+                        </c:forEach>
+
+                    </div>
+            </div>
+            <br>
+        </c:forEach>
+        <t:paginator step="8" count="${adCount}" urlprefix="?&startNumber="></t:paginator>
+        <div style="text-align: center;"><form action="/admin" method="POST"><div><label for="idCard"></label><input style="text-align: center" id="idCard" placeholder="Enter Credit Card ID" name="idCard" type="text" required=""></div>
+            <br>
+            <jsp:useBean id="startIndex" scope="request" type="java.lang.Integer"/>
+            <input type="hidden" id="startIndex" name="startIndex" value="${startIndex}"/>
+            <button class="btn btn-danger" type="submit" name="block" >Block Credit Card</button>    <button class="btn btn-success" type="submit" name="unlock" >Unlock Credit Card</button>
+            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+        </form></div>
+    </div>
+
+</div>

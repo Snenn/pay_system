@@ -4,15 +4,18 @@ package by.snenn.services;
 import by.snenn.pojos.User;
 import by.snenn.pojos.UserRole;
 
+import java.util.List;
+
 public interface IUserService {
 
     void saveOrUpdate(User user);
 
-    User loginUser(String login, String password);
-
-    String signUpUser(String surname, String name, String login, String password);
-
     UserRole getRoleUser () throws Exception;
 
     User findByLogin(String login);
+
+    List getUsersLimit(int startNumber, int countFields);
+
+    int getCountUsers();
+
 }

@@ -1,5 +1,7 @@
 package by.snenn.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -14,7 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    @Autowired
+    MessageSource message;
+
+    @RequestMapping(value = {"/default"}, method = RequestMethod.GET)
     public String showHomePage(ModelMap model) {
         return "default";
     }

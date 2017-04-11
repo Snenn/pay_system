@@ -9,7 +9,6 @@ import by.snenn.pojos.CreditCard;
 import by.snenn.pojos.User;
 import by.snenn.services.IAccountService;
 import by.snenn.services.ICreditCardService;
-import by.snenn.services.IServiceForPaginator;
 import by.snenn.services.IUserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,6 @@ public class UserController {
     private IAccountService accountService;
     @Autowired
     ICreditCardService creditCardService;
-    @Autowired
-    IServiceForPaginator serviceForPaginator;
     @Autowired
     IUserService userService;
 

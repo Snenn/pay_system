@@ -3,8 +3,9 @@ package by.snenn.controller;
 import by.snenn.controller.Util.Form;
 import by.snenn.controller.Util.Messages;
 import by.snenn.controller.Util.Patterns;
+import by.snenn.controller.Util.Util;
+import by.snenn.pojos.User;
 import by.snenn.services.ICreditCardService;
-import by.snenn.services.IServiceForPaginator;
 import by.snenn.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,12 @@ public class AdminController {
     @Autowired
     ICreditCardService creditCardService;
     @Autowired
-    IServiceForPaginator serviceForPaginator;
-    @Autowired
     IUserService userService;
 
-    @RequestMapping(value = {""}, method = {RequestMethod.POST, RequestMethod.GET })
-    public String showAdminPage(ModelMap model, HttpServletRequest req) {
+    @RequestMapping(value = {"/cr"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showMain(ModelMap model, HttpServletRequest req) {
+        User user=userService.findByLogin(Util.getPrincipal());
+        model.addAttribute("user", user);
         int startNumber;
         if (req.getParameter("block") != null) {
             if (req.getParameter("idCard").matches(Patterns.ID_CARD)) {
@@ -51,13 +52,29 @@ public class AdminController {
                 try {startNumber = Form.getInt(req, "startNumber");}
                     catch (ParseException e1){startNumber = 0;}
             }
-        model.addAttribute("adCount", serviceForPaginator.creditCardsCountForPaginator());
+        model.addAttribute("adCount", creditCardService.getCountCreditCards());
         model.addAttribute("startIndex", startNumber);
-        model.addAttribute("creditCards", serviceForPaginator.creditCardsForPaginator(startNumber, 6));
-        model.addAttribute("creditCardStatuses", serviceForPaginator.creditCardsStatusForPaginator());
-
+        model.addAttribute("creditCards", creditCardService.getCreditCardsLimit(startNumber, 8));
+        model.addAttribute("creditCardStatuses", creditCardService.getAllcreditCardsStatus());
 
         return "admin";
+    }
+
+    @RequestMapping(value = {""}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUsers(ModelMap model, HttpServletRequest req) {
+        User user=userService.findByLogin(Util.getPrincipal());
+        model.addAttribute("user", user);
+        int startNumber;
+        try {startNumber =Form.getInt(req, "startIndex");}
+        catch (ParseException e) {
+            try {startNumber = Form.getInt(req, "startNumber");}
+            catch (ParseException e1){startNumber = 0;}
+        }
+        model.addAttribute("adCount", userService.getCountUsers());
+        model.addAttribute("startIndex", startNumber);
+        model.addAttribute("users", userService.getUsersLimit(startNumber, 8));
+
+        return "adminUsers";
     }
 
 

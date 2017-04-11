@@ -4,6 +4,8 @@ package by.snenn.services;
 import by.snenn.pojos.Account;
 import by.snenn.pojos.User;
 
+import java.util.List;
+
 public interface ICreditCardService {
 
     /*blocks the card after checking the user belongs*/
@@ -25,4 +27,10 @@ public interface ICreditCardService {
 
 
     String createCreditCard(Account account);
+
+    List getCreditCardsLimit(int startNumber, int countFields);
+
+    List getAllcreditCardsStatus();
+
+    int getCountCreditCards();
 }
