@@ -14,8 +14,10 @@
         <br><p style="text-align: center; margin-top: 20px">Общие данные системы платежей</p><br>
         <p style="margin-left: 20px">Общее число клиентов: ${countUsers}  </p>
         <p style="margin-left: 20px">Общее число счетов:   ${countAccounts} </p>
-        <p style="margin-left: 20px">Общее число кредитных карт:    </p>
-        <p style="margin-left: 20px">Всего денег на всех счетах:    </p>
+        <p style="margin-left: 20px">Общее число кредитных карт:  ${countCards}  </p>
+        <p style="margin-left: 20px">Общее число платежей:   ${countPayments} </p>
+        <p style="margin-left: 20px">Общее число переводов:  ${countTransfers}  </p>
+        <p style="margin-left: 20px">Всего денег на всех счетах:   ${sumBalance} </p>
     </div>
 </head>
 <body>

@@ -90,5 +90,19 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
         return result;
     }
 
+    @Override
+    public int sumAllBalance() {
+        int result=0;
+        try {
+            Query query = getSession().createQuery("select sum (a.balance) FROM Account a");
+            result = Integer.parseInt(String.valueOf(query.uniqueResult()));
+
+        } catch (HibernateException e) {
+            logger.error("Error get count Account" + e);
+        }
+
+        return result;
+    }
+
 
 }

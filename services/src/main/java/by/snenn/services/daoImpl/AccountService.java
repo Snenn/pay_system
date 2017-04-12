@@ -97,6 +97,11 @@ public class AccountService implements IAccountService {
     public int getCountAccounts() {
         return accountDao.getCount();
     }
+
+    @Override
+    public int getSumAllBalance() {
+        return accountDao.sumAllBalance();
+    }
 }
 
 

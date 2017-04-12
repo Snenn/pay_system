@@ -10,7 +10,7 @@
 
 <fieldset>
 
-
+<img src="../../resourses/images/logo.png" width="30%" style="margin-left: 35%; margin-top: 5%">
 
     </fieldset>
 </form>

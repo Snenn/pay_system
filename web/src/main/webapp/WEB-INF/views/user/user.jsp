@@ -3,112 +3,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-
-
-<div class="navbar-default" role="navigation">
-   <div class="row">
-    <b>
-        <br>
-        <div class=col-md-1 style="text-align: center">ID</div>
-        <div class=col-md-2 style="text-align: center">Login</div>
-        <div class=col-md-2 style="text-align: center">ID Account</div>
-        <div class=col-md-2 style="text-align: center">Balance</div>
-
-
-    </b>
-   </div>
-   <br><br>
-
-    <form action="/user" method="POST">
-
-<div class="row">
-    <b>
-            <div class=col-md-1 style="text-align: center">${user.id}</div>
-            <div class=col-md-2 style="text-align: center">${user.login}</div>
-            <div class=col-md-2 style="text-align: center"><c:if test="${account.id!=null}">${account.id}</c:if></div>
-            <div class=col-md-2 style="text-align: center"><c:if test="${account.id!=null}">${account.balance}</c:if></div>
-
-            <c:if test="${account.id!=null}">
-                <div class=col-md-1 style="text-align: center"><input type="submit" name="resetAccount" value="reset this account" /></div><b></b>
-                <label for="sumPutMoney"></label><input id="sumPutMoney" name="sumPutMoney" type="text" ><input type="submit" name="putMoney" value="put money" />
-            </c:if>
-
-            <div class=col-md-1 style="text-align: center"><c:if test="${account.id==null}">
-                <input type="submit" name="createAccount" value="create new account" />
-            </c:if></div>
-
-            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
-
-
-    </b>
+<div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 900px; height: 150px; margin-left: 200px; float: left">
+    <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 900px; height: 30px">
+        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Персональные данные</div>
+    </div>
 </div>
-    </form>
-<br>
-
-    <div style="text-align: center;"><span style="font-size: x-large; font-weight: 300 "  align="center"><span
-            style="color: black; "> Credit cards list    </span></span></div>
-    <br>
-
-    <div class="row">
-        <b>
-            <div class=col-md-2 style="text-align: center">ID CreditCard</div>
-            <div class=col-md-3 style="text-align: center">BALANCE</div>
-            <div class=col-md-3 style="text-align: center">ID ACCOUNT</div>
-            <div class=col-md-3 style="text-align: center">STATUS CreditCard</div>
-
-
-        </b>
+<div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 230px; height: 150px; margin-left: 1110px">
+    <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 230px; height: 30px">
+        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Курсы валют</div>
+        <iframe style="margin-top: 20px; margin-left: 20px" src="http://www.nbrb.by/publications/wmastersd.asp?
+lan=en&datatype=0&fnt=Times&fntsize=16&fntcolor=005c7b
+&lnkcolor=fc7f7f&bgcolor=f1f1f8&brdcolor=fdf2e0"
+                width=190 height=95 frameborder=0 scrolling=no>
+        </iframe>
     </div>
-
-    <br>
-
-
-<c:forEach items="${creditCards}" var="creditCard">
-    <div class="row">
-        <c:if test="${creditCards!=null}">
-            <div class=col-md-2 style="text-align: center">${creditCard.id}</div>
-            <div class=col-md-3 style="text-align: center">${account.balance}</div>
-            <div class=col-md-3 style="text-align: center">${creditCard.account.id}</div>
-            <div class=col-md-3 style="text-align: center">
-                <jsp:useBean id="creditCardStatuses" scope="request" type="java.util.List"/>
-                <c:forEach items="${creditCardStatuses}" var="creditCardStatus">
-                    <c:if test="${creditCardStatus.id==creditCard.creditCardStatus}">
-                        ${creditCardStatus.status}
-                    </c:if>
-                </c:forEach>
-
-            </div>
-
-
-        </c:if>
-    </div>
-    <br>
-</c:forEach>
-    <form action="/user" method=POST>
-    <div class="row">
-        <div class=col-md-1 style="text-align: center"></div>
-        <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
-        <input type="submit" name="createCreditCard" value="create new Credit Card" />
-    </div>
-    </form>
-<br>
-
 </div>
+<div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 200px; height: 500px; margin-left: 200px; float: left; margin-top: 10px">
+    <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 200px; height: 30px">
+        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Меню</div>
+    </div>
+</div>
+<div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 690px; height: 500px; margin-left: 10px; float: left; margin-top: 10px">
+    <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
+        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">выбор</div>
+    </div>
+</div>
+<div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 230px; height: 500px; margin-left: 10px; float: left; margin-top: 10px">
+    <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 230px; height: 30px">
+        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px; ">Новости</div>
+        <div style="margin-top: 10px">
+            <!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="22680/"></script> <!-- end feedwind code -->
 
-<br><br>
-<div style="text-align: center;"><form action="/user" method="POST">
-    <div class=col-md-4 style="text-align: center">Enter id card<div><label for="idCardBlock"></label><input id="idCardBlock" name="idCardBlock" type="text" required=""></div><br><input type="submit" name="cardBlock" value="block the card" /></div>
-    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
-</form></div>
-<div style="text-align: center;"><form action="/user" method="POST">
-    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
-    <div class=col-md-4 style="text-align: center">Enter id card sender <div><label for="idCardSenderTransfer"></label><input id="idCardSenderTransfer" name="idCardSenderTransfer" type="text" required=""></div>Enter id card recipient <div><label for="idCardRecipientTransfer"></label><input id="idCardRecipientTransfer" name="idCardRecipientTransfer" type="text" required=""></div>
-        Enter sum <div><label for="sumTransfer"></label><input id="sumTransfer" name="sumTransfer" type="text" required=""></div><br><input type="submit" name="transfer" value="transfer money" /></div>
-</form></div>
-<div style="text-align: center;"><form action="/user" method="POST">
-    <div class=col-md-4 style="text-align: center">Enter id card sender <div><label for="idCardSenderPay"></label><input id="idCardSenderPay" name="idCardSenderPay" type="text" required=""></div>Enter sum <div><label for="sumPay"></label><input id="sumPay" name="sumPay" type="text" required=""></div> <br><input type="submit" name="pay" value="pay order" /></div>
-    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
-
-</form></div>
-<br><br>
 <%@ include file="/resourses/include/end-html.jsp" %>

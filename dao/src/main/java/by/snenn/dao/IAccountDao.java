@@ -15,4 +15,6 @@ public interface IAccountDao<TYPE> extends IDao<TYPE> {
     List<Account> getAllLimit(int startNumber, int countFields);
 
     int getCount();
+
+    int sumAllBalance ();
 }

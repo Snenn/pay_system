@@ -67,11 +67,15 @@ public class AdminController {
     }
 
     @RequestMapping(value = {""}, method = {RequestMethod.POST, RequestMethod.GET })
-    public String showMain(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+    public String showMain(HttpSession httpSession) {
         User user=userService.findByLogin(Util.getPrincipal());
         httpSession.setAttribute("user", user);
-        model.addAttribute("countUsers", userService.getCountUsers());
-        model.addAttribute("countAccounts", accountService.getCountAccounts());
+        httpSession.setAttribute("countUsers", userService.getCountUsers());
+        httpSession.setAttribute("countAccounts", accountService.getCountAccounts());
+        httpSession.setAttribute("countCards",creditCardService.getCountCreditCards());
+        httpSession.setAttribute("countPayments",paymentService.getCountPayments());
+        httpSession.setAttribute("countTransfers",transferService.getCountTransfers());
+        httpSession.setAttribute("sumBalance",accountService.getSumAllBalance());
         return "admin";
     }
 
