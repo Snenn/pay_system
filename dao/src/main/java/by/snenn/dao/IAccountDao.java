@@ -8,13 +8,19 @@ public interface IAccountDao<TYPE> extends IDao<TYPE> {
 
     List<TYPE> getAll();
 
-    TYPE readByFKUser(int id);
+    TYPE getByIdUser(int id);
 
     TYPE getLastPost() ;
 
     List<Account> getAllLimit(int startNumber, int countFields);
 
-    int getCount();
+    List<Account> getAllLimitByUser(int startNumber, int countFields, int id);
+
+    int getCountAll();
+
+    int getCountByUser(int id);
 
     int sumAllBalance ();
+
+    int sumAllBalanceByUser (int id);
 }

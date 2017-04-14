@@ -35,7 +35,7 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
         return accounts;
     }
 
-    public Account readByFKUser(int id) {
+    public Account getByIdUser(int id) {
         Account account = null;
         try {
             Query query = getSession().createQuery("from Account where user.id=:id");
@@ -77,7 +77,21 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
     }
 
     @Override
-    public int getCount() {
+    public List<Account> getAllLimitByUser(int startNumber, int countFields, int id) {
+        List<Account> accounts = null;
+        try {
+            Query query = getSession().createQuery("from Account where user.id=:id");
+            query.setParameter("id", id);
+//            query.setFirstResult(startNumber);
+//            query.setMaxResults(countFields);
+            accounts = query.list();
+        } catch (HibernateException e) {
+            logger.error("Error get Accounts" + e);
+        }
+        return  accounts;    }
+
+    @Override
+    public int getCountAll() {
         int result=0;
         try {
             Query query = getSession().createQuery("select count (*) FROM Account");
@@ -91,10 +105,40 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
     }
 
     @Override
+    public int getCountByUser(int id) {
+        int result=0;
+        try {
+            Query query = getSession().createQuery("select count (*) FROM Account  where user.id=:id");
+            query.setParameter("id", id);
+            result = Integer.parseInt(String.valueOf(query.uniqueResult()));
+
+        } catch (HibernateException e) {
+            logger.error("Error get count Account" + e);
+        }
+
+        return result;
+    }
+
+    @Override
     public int sumAllBalance() {
         int result=0;
         try {
-            Query query = getSession().createQuery("select sum (a.balance) FROM Account a");
+            Query query = getSession().createQuery("select sum(a.balance) FROM Account a");
+            result = Integer.parseInt(String.valueOf(query.uniqueResult()));
+
+        } catch (HibernateException e) {
+            logger.error("Error get count Account" + e);
+        }
+
+        return result;
+    }
+
+    @Override
+    public int sumAllBalanceByUser(int id) {
+        int result=0;
+        try {
+            Query query = getSession().createQuery("select sum (a.balance) FROM Account a where user.id=:id");
+            query.setParameter("id", id);
             result = Integer.parseInt(String.valueOf(query.uniqueResult()));
 
         } catch (HibernateException e) {

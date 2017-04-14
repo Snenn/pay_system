@@ -6,7 +6,7 @@
 
 <div class="container" style="margin-top: 30px">
 
-        <div STYLE="border-radius: 4px; size: 300px ;background-color: ghostwhite; width: 750px;  height: 530px; float: right; align-content: center">
+        <div STYLE="border-radius: 4px; size: 300px ;background-color: #f1f1f8; width: 750px;  height: 530px; float: right; align-content: center">
             <img style="margin-left:35%; margin-top: 20%; " width="35%" src="../../../resourses/images/logo.png">
         </div>
 

@@ -15,6 +15,8 @@ public interface ICreditCardDao<TYPE> extends IDao<TYPE> {
 
     int getCount();
 
+    int getCountByUser(int id);
+
     TYPE getLastPost() ;
 
 }

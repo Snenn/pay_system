@@ -5,7 +5,6 @@ import by.snenn.controller.Util.Messages;
 import by.snenn.controller.Util.Patterns;
 import by.snenn.controller.Util.Util;
 import by.snenn.pojos.Account;
-import by.snenn.pojos.CreditCard;
 import by.snenn.pojos.User;
 import by.snenn.services.IAccountService;
 import by.snenn.services.ICreditCardService;
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -34,10 +33,10 @@ public class UserController {
 
 
     @RequestMapping(value = {""}, method = {RequestMethod.POST, RequestMethod.GET })
-    public String showUserPage(ModelMap model, HttpServletRequest req) {
+    public String showUserPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         Logger logger = Logger.getLogger(HomeController.class.getName());
         User user=userService.findByLogin(Util.getPrincipal());
-        model.addAttribute("user", user);
+        httpSession.setAttribute("user", user);
         Account account = accountService.viewAccountForAccount(user.getId());
 
         if (req.getParameter("resetAccount") != null) {
@@ -97,14 +96,16 @@ public class UserController {
                 logger.error("Error1, Invalid input");            }
             model.addAttribute(Messages.msgMessage, messages);
         }
-        account = accountService.viewAccountForAccount(user.getId());
-        List<CreditCard> creditCards = null;
-        if (account != null) {
-            logger.info("test");
-            creditCards = accountService.viewCreditCardsForAccount(account.getId());
-        }
-        model.addAttribute("account", account);
-        model.addAttribute("creditCards", creditCards);
+//        account = accountService.viewAccountForAccount(user.getId());
+//        List<CreditCard> creditCards = null;
+//        if (account != null) {
+//            logger.info("test");
+//            creditCards = accountService.viewCreditCardsForAccount(account.getId());
+//        }
+        httpSession.setAttribute ("countAccounts", accountService.getCountByUser(user.getId()));
+        httpSession.setAttribute ("countCards", creditCardService.getCountCreditCardsByUser(user.getId()));
+        httpSession.setAttribute ("sumBalance", accountService.getSumAllBalanceByUser(user.getId()));
+        model.addAttribute("accounts", accountService.getAccountsLimitByUser(0,6,user.getId()) );
         model.addAttribute("creditCardStatuses", accountService.viewCreditCardStatusesForAccount());
 
 

@@ -34,5 +34,7 @@ public interface ICreditCardService {
 
     int getCountCreditCards();
 
+    int getCountCreditCardsByUser(int id);
+
 
 }

@@ -5,7 +5,7 @@
 
 <div class="container" style="margin-top: 30px">
 
-    <div STYLE="border-radius: 4px; background-color: ghostwhite; width: 750px;  height: 530px; float: right">
+    <div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 750px;  height: 530px; float: right">
 
 <div>
 

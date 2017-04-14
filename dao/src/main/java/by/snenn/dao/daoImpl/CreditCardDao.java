@@ -78,6 +78,20 @@ public class CreditCardDao extends Dao<CreditCard> implements ICreditCardDao<Cre
         return result;
     }
 
+    @Override
+    public int getCountByUser(int id) {
+        int result=0;
+        try {
+            Query query = getSession().createQuery("select count (*) FROM CreditCard where account.user.id=:id");
+            query.setParameter("id",id);
+            result = Integer.parseInt(String.valueOf(query.uniqueResult()));
+
+        } catch (HibernateException e) {
+            logger.error("Error get CreditCards" + e);
+        }
+
+        return result;    }
+
     public CreditCard getLastPost() {
         CreditCard creditCard = new CreditCard();
         try {

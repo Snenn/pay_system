@@ -30,7 +30,7 @@ public class AccountService implements IAccountService {
     @Override
     public String resetAccountUser(User user) {
         try {
-            Account account= (Account) accountDao.readByFKUser(user.getId());
+            Account account= (Account) accountDao.getByIdUser(user.getId());
             if (account.getBalance()==0) {
                 accountDao.delete(account);
                 messages="successful";
@@ -46,7 +46,7 @@ public class AccountService implements IAccountService {
 
     @Override
     public Account viewAccountForAccount(int id) {
-        return (Account) accountDao.readByFKUser(id);
+        return (Account) accountDao.getByIdUser(id);
     }
     @Override
     public List viewCreditCardsForAccount(int id) {
@@ -61,7 +61,7 @@ public class AccountService implements IAccountService {
     public String createAccount(User user) {
 
         try {
-            if (accountDao.readByFKUser(user.getId())==null){
+            if (accountDao.getByIdUser(user.getId())==null){
             Account account=new Account(0, user, null);
             accountDao.saveOrUpdate(account);}
             else messages="you have account";
@@ -76,7 +76,7 @@ public class AccountService implements IAccountService {
     public String putMoney(User user, int sum) {
 
         try {
-            Account account= (Account) accountDao.readByFKUser(user.getId());
+            Account account= (Account) accountDao.getByIdUser(user.getId());
             account.setBalance(sum+account.getBalance());
             accountDao.saveOrUpdate(account);
         } catch (Exception e) {
@@ -94,13 +94,28 @@ public class AccountService implements IAccountService {
     }
 
     @Override
+    public List getAccountsLimitByUser(int startNumber, int countFields, int idUser) {
+        return (List<Account>) accountDao.getAllLimitByUser(startNumber, countFields, idUser);
+    }
+
+    @Override
     public int getCountAccounts() {
-        return accountDao.getCount();
+        return accountDao.getCountAll();
+    }
+
+    @Override
+    public int getCountByUser(int id) {
+        return accountDao.getCountByUser(id);
     }
 
     @Override
     public int getSumAllBalance() {
         return accountDao.sumAllBalance();
+    }
+
+    @Override
+    public int getSumAllBalanceByUser(int id) {
+        return accountDao.sumAllBalanceByUser(id);
     }
 }
 

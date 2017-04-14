@@ -175,7 +175,7 @@ public class CreditCardService implements ICreditCardService {
     public int verifyCardByUser(User user, int id) {
 
         try {
-            Account account = (Account) accountDao.readByFKUser(user.getId());
+            Account account = (Account) accountDao.getByIdUser(user.getId());
             List<CreditCard> creditCards = creditCardDao.getAllByIdAccount(account.getId());
             ArrayList<Integer> idCardList = new ArrayList<>();
             for (CreditCard creditCard : creditCards) {
@@ -211,6 +211,11 @@ public class CreditCardService implements ICreditCardService {
 
     public int getCountCreditCards() {
         return creditCardDao.getCount();
+    }
+
+    @Override
+    public int getCountCreditCardsByUser(int id) {
+        return creditCardDao.getCountByUser(id);
     }
 
 

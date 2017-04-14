@@ -22,7 +22,13 @@ public interface IAccountService {
 
     List getAccountsLimit(int startNumber, int countFields);
 
+    List getAccountsLimitByUser(int startNumber, int countFields, int idUser);
+
     int getCountAccounts();
 
+    int getCountByUser(int id);
+
     int getSumAllBalance();
+
+    int getSumAllBalanceByUser(int id);
 }

@@ -11,4 +11,5 @@ public interface IPaymentDao extends IDao {
     List<Payment> getAllLimit(int startNumber, int countFields);
 
     int getCount();
+
 }
