@@ -50,6 +50,21 @@ public class TransferDao extends Dao implements ITransferDao {
     }
 
     @Override
+    public List<Transfer> getAllLimitByUser(int startNumber, int countFields, int idUser) {
+        List<Transfer> transfers = null;
+        try {
+            Query query = getSession().createQuery("from Transfer where cardSender.account.user.id=:id");
+            query.setParameter("id", idUser);
+//            query.setFirstResult(startNumber);
+//            query.setMaxResults(countFields);
+            transfers = query.list();
+        } catch (HibernateException e) {
+            logger.error("Error get Transfers" + e);
+        }
+        return  transfers;
+    }
+
+    @Override
     public int getCount() {
         int result=0;
         try {

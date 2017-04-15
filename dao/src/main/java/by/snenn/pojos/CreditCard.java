@@ -1,12 +1,15 @@
 package by.snenn.pojos;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @ToString (exclude = {"account"})
@@ -23,6 +26,18 @@ public class CreditCard implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private Account account;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "creditCardPayment", orphanRemoval = true)
+    private List<Payment> payments = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "cardSender", orphanRemoval = true)
+    private List<Transfer> transfersSender = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "cardRecipient", orphanRemoval = true)
+    private List<Transfer> transfersRecipient = new ArrayList<>();
     @Column
     private int viewNumber;
 
@@ -34,9 +49,31 @@ public class CreditCard implements Serializable {
         this.viewNumber = viewNumber;
     }
 
-
     public CreditCard() {
 
+    }
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public List<Transfer> getTransfersSender() {
+        return transfersSender;
+    }
+
+    public void setTransfersSender(List<Transfer> transfersSender) {
+        this.transfersSender = transfersSender;
+    }
+
+    public List<Transfer> getTransfersRecipient() {
+        return transfersRecipient;
+    }
+
+    public void setTransfersRecipient(List<Transfer> transfersRecipient) {
+        this.transfersRecipient = transfersRecipient;
     }
 
     public int getId() {

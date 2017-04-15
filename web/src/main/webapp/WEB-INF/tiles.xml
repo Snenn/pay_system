@@ -15,6 +15,24 @@
 
     <definition name="userCards" template="/WEB-INF/views/user/userCards.jsp"/>
 
+    <definition name="userPayments" template="/WEB-INF/views/user/userPayments.jsp"/>
+
+    <definition name="userTransfers" template="/WEB-INF/views/user/userTransfers.jsp"/>
+
+    <definition name="userCreateAccount" template="/WEB-INF/views/user/userCreateAccount.jsp"/>
+
+    <definition name="userReplenishAccount" template="/WEB-INF/views/user/userReplenishAccount.jsp"/>
+
+    <definition name="userDeleteAccount" template="/WEB-INF/views/user/userDeleteAccount.jsp"/>
+
+    <definition name="userСreateCard" template="/WEB-INF/views/user/userСreateCard.jsp"/>
+
+    <definition name="userDeleteCard" template="/WEB-INF/views/user/userDeleteCard.jsp"/>
+
+    <definition name="userCreatePayment" template="/WEB-INF/views/user/userCreatePayment.jsp"/>
+
+    <definition name="userCreateTransfer" template="/WEB-INF/views/user/userCreateTransfer.jsp"/>
+
     <definition name="admin" template="/WEB-INF/views/admin/main.jsp"/>
 
     <definition name="home1" template="/WEB-INF/views/home.jsp"/>

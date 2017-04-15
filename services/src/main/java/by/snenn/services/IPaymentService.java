@@ -10,6 +10,8 @@ public interface IPaymentService {
 
     List getPaymentsLimit(int startNumber, int countFields);
 
+    List getPaymentsLimitByUser(int startNumber, int countFields, int idUser);
+
     int getCountPayments();
 
 }

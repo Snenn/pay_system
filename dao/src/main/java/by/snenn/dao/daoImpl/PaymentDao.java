@@ -49,6 +49,21 @@ public class PaymentDao extends Dao implements IPaymentDao {
     }
 
     @Override
+    public List<Payment> getAllLimitByUser(int startNumber, int countFields, int idUser) {
+        List<Payment> payments = null;
+        try {
+            Query query = getSession().createQuery("from Payment where creditCardPayment.account.user.id=:id");
+            query.setParameter("id", idUser);
+//            query.setFirstResult(startNumber);
+//            query.setMaxResults(countFields);
+            payments = query.list();
+        } catch (HibernateException e) {
+            logger.error("Error get Payments" + e);
+        }
+        return  payments;
+    }
+
+    @Override
     public int getCount() {
         int result=0;
         try {

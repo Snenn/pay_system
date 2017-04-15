@@ -13,7 +13,7 @@
             <div class="row">
                 <div class=col-md-4 style="text-align: center">${account.getId()}</div>
                 <div class=col-md-4 style="text-align: center">${account.getBalance()}</div>
-                <div class=col-md-4 style="text-align: center">count</div>
+                <div class=col-md-4 style="text-align: center">${account.user.getId()}</div>
             </div>
             <br>
         </c:forEach>

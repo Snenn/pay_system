@@ -36,8 +36,9 @@
         </c:forEach>
         <t:paginator step="8" count="${adCount}" urlprefix="?&startNumber="></t:paginator>
         <div style="text-align: center;">
-            <form action="/admin/cr" method="POST"><div><label for="idCard"></label><input style="text-align: center" id="idCard" placeholder="Enter Credit Card ID" name="idCard" type="text" required=""></div>
-            <ajax event="click" render="creditCards"></ajax>
+            <form action="/admin/cr" method="POST"><div>
+                <label for="idCard"></label>
+                <input style="text-align: center" id="idCard" placeholder="Enter Credit Card ID" name="idCard" type="text" required=""></div>
                 <br>
             <jsp:useBean id="startIndex" scope="request" type="java.lang.Integer"/>
             <input type="hidden" id="startIndex" name="startIndex" value="${startIndex}"/>

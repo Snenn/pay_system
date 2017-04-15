@@ -111,16 +111,16 @@
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="42" parent="19" name="idCreditCard">
-      <Position>3</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="43" parent="19" name="data">
+    <column id="42" parent="19" name="data">
       <Position>4</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="43" parent="19" name="creditCardPayment_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <index id="44" parent="19" name="payment_id_uindex">
       <ColNames>id</ColNames>
@@ -144,21 +144,21 @@
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="49" parent="20" name="idCardSender">
-      <Position>3</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="50" parent="20" name="idCardRecipient">
-      <Position>4</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="51" parent="20" name="data">
+    <column id="49" parent="20" name="data">
       <Position>5</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="50" parent="20" name="cardSender_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="20" name="cardRecipient_id">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <index id="52" parent="20" name="transfer_id_uindex">
       <ColNames>id</ColNames>

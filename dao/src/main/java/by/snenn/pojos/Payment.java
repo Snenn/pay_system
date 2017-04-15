@@ -21,8 +21,9 @@ public class Payment implements Serializable{
     private int id;
     @Column
     private int sum;
-    @Column
-    private int idCreditCard;
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    private CreditCard creditCardPayment;
     @Column
     private Date data;
 
@@ -42,14 +43,6 @@ public class Payment implements Serializable{
         this.sum = sum;
     }
 
-    public int getIdCreditCard() {
-        return idCreditCard;
-    }
-
-    public void setIdCreditCard(int idCreditCard) {
-        this.idCreditCard = idCreditCard;
-    }
-
     public Date getData() {
         return data;
     }
@@ -58,9 +51,12 @@ public class Payment implements Serializable{
         this.data = data;
     }
 
-    public Payment(int sum, int idCreditCard) {
-        this.sum = sum;
-        this.idCreditCard = idCreditCard;
+    public CreditCard getCreditCard() {
+        return creditCardPayment;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCardPayment = creditCard;
     }
 
     public Payment() {

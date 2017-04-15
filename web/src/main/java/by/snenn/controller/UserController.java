@@ -6,9 +6,7 @@ import by.snenn.controller.Util.Patterns;
 import by.snenn.controller.Util.Util;
 import by.snenn.pojos.Account;
 import by.snenn.pojos.User;
-import by.snenn.services.IAccountService;
-import by.snenn.services.ICreditCardService;
-import by.snenn.services.IUserService;
+import by.snenn.services.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +28,10 @@ public class UserController {
     ICreditCardService creditCardService;
     @Autowired
     IUserService userService;
+    @Autowired
+    IPaymentService paymentService;
+    @Autowired
+    ITransferService transferService;
 
 
     @RequestMapping(value = {""}, method = {RequestMethod.POST, RequestMethod.GET })
@@ -53,11 +55,6 @@ public class UserController {
                 model.addAttribute(Messages.msgError, "Invalid input!!!");
                 logger.error("Error1, Invalid input");
             }
-            model.addAttribute(Messages.msgMessage, messages);
-        }
-
-        if (req.getParameter("createAccount") != null) {
-            String messages = accountService.createAccount(user);
             model.addAttribute(Messages.msgMessage, messages);
         }
 
@@ -121,4 +118,77 @@ public class UserController {
         model.addAttribute("creditCardStatuses", accountService.viewCreditCardStatusesForAccount());
         return "userCards";
     }
+
+    @RequestMapping(value = {"/payments"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserPaymentsPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        model.addAttribute("payments", paymentService.getPaymentsLimitByUser(0,6,user.getId()) );
+        return "userPayments";
+    }
+
+    @RequestMapping(value = {"/transfers"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserTransfersPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        model.addAttribute("transfers", transferService.getTransfersLimitByUser(0,6,user.getId()) );
+        return "userTransfers";
+    }
+
+    @RequestMapping(value = {"/createAccount"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserСreateAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        if (req.getParameter("createAccount") != null) {
+            String messages = accountService.createAccount(user);
+            model.addAttribute(Messages.msgMessage, messages);
+        }
+        httpSession.setAttribute ("countAccounts", accountService.getCountByUser(user.getId()));
+        return "userCreateAccount";
+    }
+
+    @RequestMapping(value = {"/replenishAccount"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserReplenishAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        return "userReplenishAccount";
+    }
+
+    @RequestMapping(value = {"/deleteAccount"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserDeleteAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        return "userDeleteAccount";
+    }
+
+    @RequestMapping(value = {"/createCard"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserСreateCardPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        return "userСreateCard";
+    }
+
+    @RequestMapping(value = {"/deleteCard"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserDeleteCardPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        return "userDeleteCard";
+    }
+
+    @RequestMapping(value = {"/createPayment"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserCreatePaymentPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        return "userCreatePayment";
+    }
+
+    @RequestMapping(value = {"/createTransfer"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserCreateTransferPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        return "userCreateTransfer";
+    }
+
+
+
+
 }

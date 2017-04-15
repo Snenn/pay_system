@@ -26,8 +26,8 @@
                     <div class="row">
                         <div class=col-md-2 style="text-align: center">${transfer.getId()}</div>
                         <div class=col-md-2 style="text-align: center">${transfer.getSum()}</div>
-                        <div class=col-md-2 style="text-align: center">${transfer.getIdCardSender()}</div>
-                        <div class=col-md-2 style="text-align: center">${transfer.getIdCardRecipient()}</div>
+                        <div class=col-md-2 style="text-align: center">${transfer.cardSender.getId()}</div>
+                        <div class=col-md-2 style="text-align: center">${transfer.cardRecipient.getId()}</div>
                         <div class=col-md-4 style="text-align: center">${transfer.getData()}</div>
                     </div>
                     <br>

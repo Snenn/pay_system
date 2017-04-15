@@ -1,7 +1,9 @@
 package by.snenn.services.daoImpl;
 
 
+import by.snenn.dao.ICreditCardDao;
 import by.snenn.dao.IPaymentDao;
+import by.snenn.pojos.CreditCard;
 import by.snenn.pojos.Payment;
 import by.snenn.services.IPaymentService;
 import org.apache.log4j.Logger;
@@ -18,6 +20,8 @@ public class PaymentService implements IPaymentService {
 
     @Autowired
     private IPaymentDao paymentDao ;
+    @Autowired
+    private ICreditCardDao creditCardDao ;
 
     private Logger logger= Logger.getLogger(CreditCardService.class.getName());
     private String messages = null;
@@ -33,7 +37,7 @@ public class PaymentService implements IPaymentService {
         try {
             Payment payment=new Payment();
             payment.setSum(sum);
-            payment.setIdCreditCard(idCard);
+            payment.setCreditCard((CreditCard) creditCardDao.get(idCard));
             payment.setData(Calendar.getInstance().getTime());
             paymentDao.saveOrUpdate(payment);
             messages="payment save";
@@ -46,6 +50,11 @@ public class PaymentService implements IPaymentService {
     @Override
     public List getPaymentsLimit(int startNumber, int countFields) {
         return (List<Payment>) paymentDao.getAllLimit(startNumber, countFields);
+    }
+
+    @Override
+    public List getPaymentsLimitByUser(int startNumber, int countFields, int idUser) {
+        return (List<Payment>) paymentDao.getAllLimitByUser(startNumber, countFields, idUser);
     }
 
     @Override

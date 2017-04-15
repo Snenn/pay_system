@@ -20,10 +20,12 @@ public class Transfer implements Serializable {
     private int id;
     @Column
     private int sum;
-    @Column
-    private int idCardSender;
-    @Column
-    private int idCardRecipient;
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    private CreditCard cardSender;
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    private CreditCard cardRecipient;
     @Column
     private Date data;
 
@@ -43,20 +45,20 @@ public class Transfer implements Serializable {
         this.sum = sum;
     }
 
-    public int getIdCardSender() {
-        return idCardSender;
+    public CreditCard getCardSender() {
+        return cardSender;
     }
 
-    public void setIdCardSender(int idCardSender) {
-        this.idCardSender = idCardSender;
+    public void setCardSender(CreditCard cardSender) {
+        this.cardSender = cardSender;
     }
 
-    public int getIdCardRecipient() {
-        return idCardRecipient;
+    public CreditCard getCardRecipient() {
+        return cardRecipient;
     }
 
-    public void setIdCardRecipient(int idCardRecipient) {
-        this.idCardRecipient = idCardRecipient;
+    public void setCardRecipient(CreditCard cardRecipient) {
+        this.cardRecipient = cardRecipient;
     }
 
     public Date getData() {
@@ -65,12 +67,6 @@ public class Transfer implements Serializable {
 
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public Transfer(int sum, int idCardSender, int idCardRecipient ) {
-        this.sum = sum;
-        this.idCardSender = idCardSender;
-        this.idCardRecipient =idCardRecipient;
     }
 
     public Transfer() {

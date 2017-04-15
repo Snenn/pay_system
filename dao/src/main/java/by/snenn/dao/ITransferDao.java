@@ -9,6 +9,8 @@ public interface ITransferDao extends IDao {
 
     List<Transfer> getAllLimit(int startNumber, int countFields);
 
+    List<Transfer> getAllLimitByUser(int startNumber, int countFields, int idUser);
+
     int getCount();
 
 

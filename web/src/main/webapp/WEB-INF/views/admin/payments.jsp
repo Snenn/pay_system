@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class=col-md-3 style="text-align: center">${payment.getId()}</div>
                         <div class=col-md-3 style="text-align: center">${payment.getSum()}</div>
-                        <div class=col-md-3 style="text-align: center">${payment.getIdCreditCard()}</div>
+                        <div class=col-md-3 style="text-align: center">${payment.creditCard.getId()}</div>
                         <div class=col-md-3 style="text-align: center">${payment.getData()}</div>
 
                     </div>

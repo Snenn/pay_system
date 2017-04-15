@@ -61,12 +61,13 @@ public class AccountService implements IAccountService {
     public String createAccount(User user) {
 
         try {
-            if (accountDao.getByIdUser(user.getId())==null){
+            if (accountDao.getCountByUser(user.getId())<5){
             Account account=new Account(0, user, null);
             accountDao.saveOrUpdate(account);}
-            else messages="you have account";
+            else messages="you have 5 account";
         }
         catch (Exception e) {
+            messages="Error";
             logger.error("Error2");
         }
         return messages;

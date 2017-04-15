@@ -11,5 +11,7 @@ public interface ITransferService {
 
     List getTransfersLimit(int startNumber, int countFields);
 
+    List getTransfersLimitByUser(int startNumber, int countFields, int idUser);
+
     int getCountTransfers();
 }
