@@ -11,7 +11,9 @@
 
     <definition name="" template="/WEB-INF/views/login.jsp"/>
 
-    <definition name="user" template="/WEB-INF/views/user/user.jsp"/>
+    <definition name="user" template="/WEB-INF/views/user/userMainAccounts.jsp"/>
+
+    <definition name="userCards" template="/WEB-INF/views/user/userCards.jsp"/>
 
     <definition name="admin" template="/WEB-INF/views/admin/main.jsp"/>
 

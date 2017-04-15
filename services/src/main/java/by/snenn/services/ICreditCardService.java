@@ -30,6 +30,8 @@ public interface ICreditCardService {
 
     List getCreditCardsLimit(int startNumber, int countFields);
 
+    List getCreditCardsLimitByUser(int startNumber, int countFields, int idUser);
+
     List getAllcreditCardsStatus();
 
     int getCountCreditCards();

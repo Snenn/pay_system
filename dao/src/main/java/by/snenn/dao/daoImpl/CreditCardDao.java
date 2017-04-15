@@ -65,6 +65,21 @@ public class CreditCardDao extends Dao<CreditCard> implements ICreditCardDao<Cre
         return  creditCards;
     }
 
+    @Override
+    public List<CreditCard> getAllLimitByUser(int startNumber, int endNumber, int idUser) {
+        List<CreditCard> creditCards = null;
+        try {
+            Query query = getSession().createQuery("FROM CreditCard WHERE account.user.id=:id ");
+            query.setParameter("id",idUser);
+            query.setFirstResult(startNumber);
+            query.setMaxResults(endNumber);
+            creditCards = query.list();
+        } catch (HibernateException e) {
+            logger.error("Error get CreditCards" + e);
+        }
+        return  creditCards;
+    }
+
     public int getCount(){
         int result=0;
         try {

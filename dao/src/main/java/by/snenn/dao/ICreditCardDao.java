@@ -13,6 +13,8 @@ public interface ICreditCardDao<TYPE> extends IDao<TYPE> {
 
     List<TYPE> getAllLimit(int startNumber, int endNumber) ;
 
+    List<TYPE> getAllLimitByUser(int startNumber, int endNumber, int idUser) ;
+
     int getCount();
 
     int getCountByUser(int id);

@@ -112,4 +112,13 @@ public class UserController {
 
         return "user";
     }
+
+    @RequestMapping(value = {"/cards"}, method = {RequestMethod.POST, RequestMethod.GET })
+    public String showUserCardsPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+        User user= (User) httpSession.getAttribute("user");
+        Logger logger = Logger.getLogger(HomeController.class.getName());
+        model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,6,user.getId()) );
+        model.addAttribute("creditCardStatuses", accountService.viewCreditCardStatusesForAccount());
+        return "userCards";
+    }
 }

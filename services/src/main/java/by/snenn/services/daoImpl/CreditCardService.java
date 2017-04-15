@@ -209,6 +209,11 @@ public class CreditCardService implements ICreditCardService {
         return (List<CreditCard>) creditCardDao.getAllLimit(startNumber, countFields);
     }
 
+    @Override
+    public List getCreditCardsLimitByUser(int startNumber, int countFields, int idUser) {
+        return (List<CreditCard>) creditCardDao.getAllLimitByUser(startNumber, countFields, idUser);
+    }
+
     public int getCountCreditCards() {
         return creditCardDao.getCount();
     }

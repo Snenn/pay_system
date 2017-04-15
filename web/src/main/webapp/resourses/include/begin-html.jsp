@@ -12,8 +12,8 @@
 <head >
     <meta http-equiv="Cache-Control" content="no-cache">
     <title>pay</title>
-    <link href="resourses/css/bootstrap.css" rel="stylesheet" />
-    <script src="resourses/js/bootstrap.js"></script>
+    <link href="/resourses/css/bootstrap.css" rel="stylesheet" />
+    <script src="/resourses/js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 
