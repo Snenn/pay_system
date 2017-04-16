@@ -24,16 +24,7 @@ public class AccountServiceTest {
     @Autowired
     IUserService userService;
 
-    @Test
-    public void resetAccountUser() throws Exception {
-        User user=new User("resetAccountUser","resetAccountUser","resetAccountUser","resetAccountUser" ,null,null);
-        userService.saveOrUpdate(user);
-        accountService.createAccount(user);
-        user=userService.findByLogin("resetAccountUser");
-        accountService.resetAccountUser(user);
-        Account account=accountService.viewAccountForAccount(user.getId());
-        Assert.assertNull(account);
-    }
+
 
     @Test
     public void viewAccountForAccount() throws Exception {
@@ -64,15 +55,6 @@ public class AccountServiceTest {
         Assert.assertNotNull(account);
     }
 
-    @Test
-    public void putMoney() throws Exception {
-        User user=new User("putMoney","putMoney","putMoney","putMoney" ,null,null);
-        userService.saveOrUpdate(user);
-        accountService.createAccount(user);
-        accountService.putMoney(user,500);
-        user=userService.findByLogin("putMoney");
-        Account account=accountService.viewAccountForAccount(user.getId());
-        Assert.assertEquals(account.getBalance(), 500);
-    }
+
 
 }

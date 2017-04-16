@@ -28,9 +28,9 @@ public class AccountService implements IAccountService {
     private IAccountDao accountDao;
 
     @Override
-    public String resetAccountUser(User user) {
+    public String resetAccountUser(int idAccount) {
         try {
-            Account account= (Account) accountDao.getByIdUser(user.getId());
+            Account account= (Account) accountDao.get(idAccount);
             if (account.getBalance()==0) {
                 accountDao.delete(account);
                 messages="successful";
@@ -74,10 +74,10 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public String putMoney(User user, int sum) {
+    public String putMoney(int idAccount, int sum) {
 
         try {
-            Account account= (Account) accountDao.getByIdUser(user.getId());
+            Account account= (Account) accountDao.get(idAccount);
             account.setBalance(sum+account.getBalance());
             accountDao.saveOrUpdate(account);
         } catch (Exception e) {

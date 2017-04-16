@@ -8,7 +8,7 @@ public interface IAccountDao<TYPE> extends IDao<TYPE> {
 
     List<TYPE> getAll();
 
-    TYPE getByIdUser(int id);
+    List<Account> getByIdUser(int id);
 
     TYPE getLastPost() ;
 

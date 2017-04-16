@@ -1,7 +1,6 @@
 package by.snenn.services;
 
 
-import by.snenn.pojos.Account;
 import by.snenn.pojos.User;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public interface ICreditCardService {
     int verifyCardByUser(User user, int id);
 
 
-    String createCreditCard(Account account);
+    String createCreditCard(int idAccount);
 
     List getCreditCardsLimit(int startNumber, int countFields);
 

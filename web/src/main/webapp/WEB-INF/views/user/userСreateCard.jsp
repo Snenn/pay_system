@@ -18,16 +18,26 @@
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
         <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Создание карты</div>
 
-        Выберите счет к которому будет прикреплена карта.<br>
+            <div style="margin-left: 20px; margin-top: 20px">
 
-        Баланс счета будет привязан к карте.<br>
+            Выберите счет к которому будет прикреплена карта.<br><br>
+            <form action="/user/createCard" method="post">
+                <select class="form-control" style="width: 400px" name="selectCard">
+                    <c:forEach var="account" items="${accounts}">
+                        <option>ID ${account.getId()} balance ${account.getBalance()} byn </option>
+                    </c:forEach>
+                </select>
+                <br>
 
-        Карту можно будет забрать в головном офисе через 3 рабочих дня после создания.<br>
+        Баланс счета будет привязан к карте.<br><br>
 
-        Оплату создания карты можно будет произвести в момент ее получения в отделении.
+        Карту можно будет забрать в головном офисе через 3 рабочих дня после создания.<br><br>
 
-        <button>Создать карту</button>
-
+        Оплату создания карты можно будет произвести в момент ее получения в отделении.<br><br>
+                <button class="btn btn-success" type="submit" name="createCard" >Создать карту</button>
+                <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+            </form>
+        </div>
     </div>
 
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IAccountService {
 
-    String resetAccountUser(User user);
+    String resetAccountUser(int idAccount);
 
     Account viewAccountForAccount(int id);
 
@@ -18,7 +18,7 @@ public interface IAccountService {
 
     String createAccount(User user);
 
-    String putMoney(User user, int sum);
+    String putMoney(int idAccount, int sum);
 
     List getAccountsLimit(int startNumber, int countFields);
 

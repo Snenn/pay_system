@@ -35,16 +35,16 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
         return accounts;
     }
 
-    public Account getByIdUser(int id) {
-        Account account = null;
+    public List<Account> getByIdUser(int id) {
+        List<Account> accounts = null;
         try {
             Query query = getSession().createQuery("from Account where user.id=:id");
             query.setParameter("id", id);
-            account = (Account) query.uniqueResult();
+            accounts = query.list();
         } catch (HibernateException e) {
             logger.error("Error get CreditCards" + e);
         }
-        return account;
+        return accounts;
     }
 
 

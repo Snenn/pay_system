@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@ToString
+@ToString(exclude = {"cardSender","cardRecipient"})
 @EqualsAndHashCode
 @Entity
 @Table(name = "TRANSFER")

@@ -18,14 +18,24 @@
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
         <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Удаление карты</div>
 
-        Выберите карту для удаления.<br>
+        <div style="margin-left: 20px; margin-top: 20px">
 
-        Т.к. баланс отражаемый на карте привязан к счету, то удаление карты никак на него не влияет.<br>
+        Выберите карту для удаления.<br><br>
+            <form action="/user/deleteCard" method="post">
+                <select class="form-control" style="width: 400px" name="selectCard">
+                    <c:forEach var="card" items="${cards}">
+                        <option>ID ${card.getId()} balance ${card.account.getBalance()} byn </option>
+                    </c:forEach>
+                </select>
+                <br>
 
-        После удаления карты ее восстановить будет невозможно.
+        Т.к. баланс отражаемый на карте привязан к счету, то удаление карты никак на него не влияет.<br><br>
 
-        <button>Удалить карту</button>
-
+        После удаления карты ее восстановить будет невозможно.<br><br>
+                <button class="btn btn-success" type="submit" name="deleteCard" >Удалить карту</button>
+                <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+            </form>
+        </div>
     </div>
 
 

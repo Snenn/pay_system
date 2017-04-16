@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@ToString
+@ToString (exclude = {"creditCardPayment"})
 @EqualsAndHashCode
 @Entity
 @Table(name = "PAYMENT")

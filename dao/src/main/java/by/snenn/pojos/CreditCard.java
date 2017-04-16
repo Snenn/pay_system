@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@ToString (exclude = {"account"})
-@EqualsAndHashCode(exclude = {"creditCardStatus", "account"})
+@ToString (exclude = {"account","payments","transfersSender","cardRecipient"})
+@EqualsAndHashCode(exclude = {"creditCardStatus", "account","payments","transfersSender","cardRecipient"})
 @Entity
 @Table(name = "CREDIT_CARD")
 public class CreditCard implements Serializable {

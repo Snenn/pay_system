@@ -190,11 +190,12 @@ public class CreditCardService implements ICreditCardService {
     }
 
     @Override
-    public String createCreditCard(Account account) {
+    public String createCreditCard(int idAccount) {
 
         try {
+            Account account= (Account) accountDao.get(idAccount);
             List creditCards =creditCardDao.getAllByIdAccount(account.getId());
-            if (creditCards.size()<=2){
+            if (creditCards.size()<=19){
             CreditCard creditCard= new CreditCard(1,account,1);
             creditCardDao.saveOrUpdate(creditCard);
             messages="Credit card created";}

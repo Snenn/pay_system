@@ -18,18 +18,31 @@
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
         <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Создание платежа</div>
 
-        Выберите карту с которой будет произведен платеж.<br>
+        <div style="margin-left: 20px; margin-top: 20px">
 
-        Сумма платежа должна быть целой.<br>
+        Выберите карту с которой будет произведен платеж.<br><br>
+            <form action="/user/createPayment" method="post">
+                <select class="form-control" style="width: 400px" name="selectCard">
+                    <c:forEach var="card" items="${cards}">
+                        <option>ID ${card.getId()} balance ${card.account.getBalance()} byn  </option>
+                    </c:forEach>
+                </select><br>
+        Сумма платежа должна быть целой.<br><br>
 
-        Сумма платежа должна быть остатка средств на карте.<br>
+        Сумма платежа должна быть остатка средств на карте.<br><br>
+        Введите сумму платежа.<br><br>
 
-        Отменить платеж после проведения будет не возможно.<br>
+        <input style="width: 400px" id="sum" name="sum" type="text" placeholder="input sum" class="form-control input-md" required="">
+                <br>
 
-        Деньги будут списаны сразу.
+        Отменить платеж после проведения будет не возможно.<br><br>
 
-        <button>Создать карту</button>
+        Деньги будут списаны сразу.<br><br>
 
+                <button class="btn btn-success" type="submit" name="createPayment" >Создать платеж</button>
+                <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+            </form>
+        </div>
     </div>
 
 

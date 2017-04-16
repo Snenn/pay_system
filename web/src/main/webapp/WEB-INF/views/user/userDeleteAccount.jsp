@@ -17,13 +17,20 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
         <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Удаление счета</div>
-
-        Для удаления счета необходимо чтобы его баланс был равен 0.
-
-        Выберите необходимый счет для удаления.
-
-        <button>Удалить счет</button>
-
+        <div style="margin-left: 20px; margin-top: 20px">
+        Для удаления счета необходимо чтобы его баланс был равен 0.<br><br>
+        Выберите необходимый счет для удаления.<br><br>
+            <form action="/user/deleteAccount" method="GET">
+            <select class="form-control" style="width: 400px" name="selectAccount">
+                <c:forEach var="account" items="${accounts}">
+                    <option>ID ${account.getId()} balance ${account.getBalance()} byn </option>
+                </c:forEach>
+            </select>
+<br>
+                <button class="btn btn-success" type="submit" name="deleteAccount" >Удалить счет</button>
+                <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
+            </form>
+        </div>
     </div>
 
 

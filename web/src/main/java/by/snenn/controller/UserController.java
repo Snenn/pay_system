@@ -1,10 +1,6 @@
 package by.snenn.controller;
 
-import by.snenn.controller.Util.Form;
-import by.snenn.controller.Util.Messages;
-import by.snenn.controller.Util.Patterns;
-import by.snenn.controller.Util.Util;
-import by.snenn.pojos.Account;
+import by.snenn.controller.Util.*;
 import by.snenn.pojos.User;
 import by.snenn.services.*;
 import org.apache.log4j.Logger;
@@ -39,34 +35,6 @@ public class UserController {
         Logger logger = Logger.getLogger(HomeController.class.getName());
         User user=userService.findByLogin(Util.getPrincipal());
         httpSession.setAttribute("user", user);
-        Account account = accountService.viewAccountForAccount(user.getId());
-
-        if (req.getParameter("resetAccount") != null) {
-            String messages = accountService.resetAccountUser(user);
-            model.addAttribute(Messages.msgMessage, messages);
-        }
-
-        if (req.getParameter("putMoney") != null) {
-            String messages = null;
-            try {
-                messages = accountService.putMoney(user,
-                        Integer.parseInt(Form.getString(req.getParameter("sumPutMoney"), Patterns.NUMBER)));
-            } catch (ParseException e) {
-                model.addAttribute(Messages.msgError, "Invalid input!!!");
-                logger.error("Error1, Invalid input");
-            }
-            model.addAttribute(Messages.msgMessage, messages);
-        }
-
-        if (req.getParameter("createCreditCard") != null) {
-            String messages = creditCardService.createCreditCard(account);
-            model.addAttribute(Messages.msgMessage, messages);
-        }
-
-        if (req.getParameter("cardBlock") != null) {
-            String messages = creditCardService.blockCardUser(user, Integer.parseInt(req.getParameter("idCardBlock")));
-            model.addAttribute(Messages.msgMessage, messages);
-        }
 
         if (req.getParameter("transfer") != null) {
             String messages = null;
@@ -93,12 +61,7 @@ public class UserController {
                 logger.error("Error1, Invalid input");            }
             model.addAttribute(Messages.msgMessage, messages);
         }
-//        account = accountService.viewAccountForAccount(user.getId());
-//        List<CreditCard> creditCards = null;
-//        if (account != null) {
-//            logger.info("test");
-//            creditCards = accountService.viewCreditCardsForAccount(account.getId());
-//        }
+
         httpSession.setAttribute ("countAccounts", accountService.getCountByUser(user.getId()));
         httpSession.setAttribute ("countCards", creditCardService.getCountCreditCardsByUser(user.getId()));
         httpSession.setAttribute ("sumBalance", accountService.getSumAllBalanceByUser(user.getId()));
@@ -142,21 +105,43 @@ public class UserController {
         if (req.getParameter("createAccount") != null) {
             String messages = accountService.createAccount(user);
             model.addAttribute(Messages.msgMessage, messages);
+            httpSession.setAttribute ("countAccounts", accountService.getCountByUser(user.getId()));
         }
         httpSession.setAttribute ("countAccounts", accountService.getCountByUser(user.getId()));
         return "userCreateAccount";
     }
 
     @RequestMapping(value = {"/replenishAccount"}, method = {RequestMethod.POST, RequestMethod.GET })
-    public String showUserReplenishAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+    public String showUserReplenishAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) throws ParseException {
         Logger logger = Logger.getLogger(HomeController.class.getName());
+        User user= (User) httpSession.getAttribute("user");
+        model.addAttribute("accounts", accountService.getAccountsLimitByUser(0,6,user.getId()) );
+        if (req.getParameter("replenishAccount") != null) {
+            String messages = null;
+            try {
+                messages = accountService.putMoney(
+                        Parser.parserIdFromForm(req.getParameter("selectAccount")),
+                        Integer.parseInt(Form.getString(req.getParameter("sum"), Patterns.NUMBER)));
+            } catch (ParseException e) {
+                model.addAttribute(Messages.msgMessage, "Invalid input!!!");
+                logger.error("Error1, Invalid input");
+            }
+            model.addAttribute(Messages.msgMessage, messages);
+        }
+        httpSession.setAttribute ("sumBalance", accountService.getSumAllBalanceByUser(user.getId()));
         return "userReplenishAccount";
     }
 
     @RequestMapping(value = {"/deleteAccount"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserDeleteAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
-        User user= (User) httpSession.getAttribute("user");
         Logger logger = Logger.getLogger(HomeController.class.getName());
+        User user= (User) httpSession.getAttribute("user");
+        model.addAttribute("accounts", accountService.getAccountsLimitByUser(0,6,user.getId()) );
+        if (req.getParameter("deleteAccount") != null) {
+            String messages = accountService.resetAccountUser(Parser.parserIdFromForm(req.getParameter("selectAccount")));
+            model.addAttribute(Messages.msgMessage, messages);
+            httpSession.setAttribute ("countAccounts", accountService.getCountByUser(user.getId()));
+        }
         return "userDeleteAccount";
     }
 
@@ -164,6 +149,12 @@ public class UserController {
     public String showUserСreateCardPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
         Logger logger = Logger.getLogger(HomeController.class.getName());
+        model.addAttribute("accounts", accountService.getAccountsLimitByUser(0,6,user.getId()) );
+        if (req.getParameter("createCard") != null) {
+            String messages = creditCardService.createCreditCard(Parser.parserIdFromForm(req.getParameter("selectCard")));
+            model.addAttribute(Messages.msgMessage, messages);
+            httpSession.setAttribute ("countCards", creditCardService.getCountCreditCardsByUser(user.getId()));
+        }
         return "userСreateCard";
     }
 
@@ -171,6 +162,12 @@ public class UserController {
     public String showUserDeleteCardPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
         Logger logger = Logger.getLogger(HomeController.class.getName());
+        model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,30,user.getId()) );
+        if (req.getParameter("deleteCard") != null) {
+            String messages = creditCardService.blockCard(Parser.parserIdFromForm(req.getParameter("selectCard")));
+            model.addAttribute(Messages.msgMessage, messages);
+            httpSession.setAttribute ("countCards", creditCardService.getCountCreditCardsByUser(user.getId()));
+        }
         return "userDeleteCard";
     }
 
@@ -178,6 +175,20 @@ public class UserController {
     public String showUserCreatePaymentPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
         Logger logger = Logger.getLogger(HomeController.class.getName());
+        model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,30,user.getId()) );
+        if (req.getParameter("createPayment") != null) {
+            String messages = null;
+            try {
+                messages = creditCardService.payOrderUser(user,
+                        Parser.parserIdFromForm(req.getParameter("selectCard")),
+                        Integer.parseInt(Form.getString(req.getParameter("sum"), Patterns.NUMBER)));
+                httpSession.setAttribute ("sumBalance", accountService.getSumAllBalanceByUser(user.getId()));
+            } catch (ParseException e) {
+                model.addAttribute(Messages.msgMessage, "Invalid input!!!");
+                logger.error("Error1, Invalid input");
+            }
+            model.addAttribute(Messages.msgMessage, messages);
+        }
         return "userCreatePayment";
     }
 
@@ -185,6 +196,21 @@ public class UserController {
     public String showUserCreateTransferPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
         Logger logger = Logger.getLogger(HomeController.class.getName());
+        model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,30,user.getId()) );
+        if (req.getParameter("createTransfer") != null) {
+            String messages = null;
+            try {
+                messages = creditCardService.transferMoneyUser(user,
+                        Parser.parserIdFromForm(req.getParameter("selectCard")),
+                        Integer.parseInt(Form.getString(req.getParameter("idRecipient"), Patterns.NUMBER)),
+                        Integer.parseInt(Form.getString(req.getParameter("sum"), Patterns.NUMBER)));
+            } catch (ParseException e) {
+                model.addAttribute(Messages.msgMessage, "Invalid input!!!");
+                logger.error("Error1, Invalid input");
+            }
+            model.addAttribute(Messages.msgMessage, messages);
+        }
+        httpSession.setAttribute ("sumBalance", accountService.getSumAllBalanceByUser(user.getId()));
         return "userCreateTransfer";
     }
 
