@@ -4,16 +4,26 @@
 
     <div style="margin-top: 20px">
 
-        <div style="float: left; margin-left: 10%">ID credit cart</div>
-        <div style="float: left; margin-left: 25%">ID account</div>
-        <div style="float: left; margin-left: 25%">Balance</div>
+        <div style="float: left; margin-left: 5%">ID credit cart</div>
+        <div style="float: left; margin-left: 15%">ID account</div>
+        <div style="float: left; margin-left: 15%">Balance</div>
+        <div style="float: left; margin-left: 15%">STATUS CreditCard</div>
+
 
         <br>
         <c:forEach var="card" items="${cards}" >
             <div class="row">
-                <div class=col-md-4 style="text-align: center">${card.getId()}</div>
-                <div class=col-md-4 style="text-align: center">${card.account.getId()}</div>
-                <div class=col-md-4 style="text-align: center">${card.account.getBalance()}</div>
+                <div class=col-md-3 style="text-align: center">${card.getId()}</div>
+                <div class=col-md-3 style="text-align: center">${card.account.getId()}</div>
+                <div class=col-md-3 style="text-align: center">${card.account.getBalance()}</div>
+                <div class=col-md-3 style="text-align: center">
+                    <c:forEach items="${creditCardStatuses}" var="creditCardStatus">
+                        <c:if test="${creditCardStatus.getId()==card.getCreditCardStatus()}">
+                            ${creditCardStatus.getStatus()}
+                        </c:if>
+                    </c:forEach>
+
+                </div>
             </div>
             <br>
         </c:forEach>

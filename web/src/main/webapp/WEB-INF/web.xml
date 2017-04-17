@@ -51,6 +51,16 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404</location>
+    </error-page>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

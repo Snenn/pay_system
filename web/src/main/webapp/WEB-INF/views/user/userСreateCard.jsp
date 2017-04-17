@@ -17,7 +17,13 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
         <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Создание карты</div>
-
+<c:if test="${countAccounts==0}">
+    <div style="margin-left: 20px; margin-top: 50px">
+        У вас нет актуального счета.<br><br>
+        Для создания карты необходимо завести счет в меню "создать счет".
+    </div>
+</c:if>
+<c:if test="${countAccounts>0}">
             <div style="margin-left: 20px; margin-top: 20px">
 
             Выберите счет к которому будет прикреплена карта.<br><br>
@@ -38,6 +44,7 @@
                 <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
             </form>
         </div>
+</c:if>
     </div>
 
 

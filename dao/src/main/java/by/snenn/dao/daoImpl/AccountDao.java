@@ -124,12 +124,11 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
         int result=0;
         try {
             Query query = getSession().createQuery("select sum(a.balance) FROM Account a");
-            result = Integer.parseInt(String.valueOf(query.uniqueResult()));
-
+            String rest=String.valueOf(query.uniqueResult());
+            if (!rest.equals("null")) {result = Integer.parseInt(rest);}
         } catch (HibernateException e) {
             logger.error("Error get count Account" + e);
         }
-
         return result;
     }
 
@@ -139,8 +138,8 @@ public class AccountDao extends Dao<Account> implements IAccountDao<Account> {
         try {
             Query query = getSession().createQuery("select sum (a.balance) FROM Account a where user.id=:id");
             query.setParameter("id", id);
-            result = Integer.parseInt(String.valueOf(query.uniqueResult()));
-
+            String rest=String.valueOf(query.uniqueResult());
+            if (!rest.equals("null")) {result = Integer.parseInt(rest);}
         } catch (HibernateException e) {
             logger.error("Error get count Account" + e);
         }

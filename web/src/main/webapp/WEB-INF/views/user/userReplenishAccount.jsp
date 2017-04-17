@@ -17,11 +17,18 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
         <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Пополнение счета</div>
+<c:if test="${countAccounts==0}">
+    <div style="margin-left: 20px; margin-top: 50px">
+        У вас нет актуального счета.<br><br>
+        Для пополнения счета необходимо завести счет в меню "создать счет".
+    </div>
+</c:if>
+<c:if test="${countAccounts>0}">
         <div style="margin-left: 20px; margin-top: 20px">
             <form action="/user/replenishAccount" method="POST">
 
         Сумма пополнения должна быть целой и более 0.<br><br>
-                <input style="width: 400px" id="sum" name="sum" type="text" placeholder="input sum" class="form-control input-md" required="">
+                <input style="width: 400px" id="sum" name="sum" type="text" pattern="[0-9]+" required title="Разрешены только цифры" placeholder="input sum" class="form-control input-md" >
 <br>
                 Выберите счет для пополнения.<br><br>
 
@@ -37,7 +44,7 @@
                 <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
             </form>
         </div>
-
+</c:if>
     </div>
 
 

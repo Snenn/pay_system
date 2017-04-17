@@ -38,7 +38,7 @@
         <div style="text-align: center;">
             <form action="/admin/cr" method="POST"><div>
                 <label for="idCard"></label>
-                <input style="text-align: center" id="idCard" placeholder="Enter Credit Card ID" name="idCard" type="text" required=""></div>
+                <input style="text-align: center" id="idCard"  pattern="[0-9]+" required title="Разрешены только цифры" placeholder="Enter Credit Card ID" name="idCard" type="text" required=""></div>
                 <br>
             <jsp:useBean id="startIndex" scope="request" type="java.lang.Integer"/>
             <input type="hidden" id="startIndex" name="startIndex" value="${startIndex}"/>

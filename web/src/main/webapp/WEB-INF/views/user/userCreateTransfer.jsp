@@ -17,7 +17,13 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
         <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Создание перевода</div>
-
+<c:if test="${countCards==0}">
+    <div style="margin-left: 20px; margin-top: 50px">
+        У вас нет карт.<br><br>
+        Для создания перевода необходимо завести карту в меню "создать карту".
+    </div>
+</c:if>
+<c:if test="${countCards>0}">
         <div style="margin-left: 20px; margin-top: 20px">
 
         Ваша карта не должна быть заблокирована.<br><br>
@@ -26,20 +32,27 @@
             <form action="/user/createTransfer" method="post">
                 <select class="form-control" style="width: 400px" name="selectCard">
                     <c:forEach var="card" items="${cards}">
-                        <option>ID ${card.getId()} balance ${card.account.getBalance()} byn </option>
+                        <option>ID ${card.getId()} balance ${card.account.getBalance()} byn
+                        <c:forEach items="${creditCardStatuses}" var="creditCardStatus">
+                            <c:if test="${creditCardStatus.getId()==card.getCreditCardStatus()}">
+                                ${creditCardStatus.getStatus()}
+                            </c:if>
                     </c:forEach>
-                </select><br>
+                        </option>
+                    </c:forEach>
+                        </select><br>
         Сумма перевода должна быть целой<br><br>
-        <input style="width: 400px" id="sum" name="sum" type="text" placeholder="input sum" class="form-control input-md" required="">
+        <input style="width: 400px" id="sum" name="sum" type="text" pattern="[0-9]+" required title="Разрешены только цифры" placeholder="input sum" class="form-control input-md" required="">
         <br>
         Карта получателя должна существовать и не должна быть заблокирована.<br><br>
-        <input style="width: 400px" id="idRecipient" name="idRecipient" type="text" placeholder="input id card Recipient" class="form-control input-md" required="">
+        <input style="width: 400px" id="idRecipient" name="idRecipient" type="text" pattern="[0-9]+" required title="Разрешены только цифры" placeholder="input id card Recipient" class="form-control input-md" required="">
         <br>
 
         <button class="btn btn-success" type="submit" name="createTransfer" >Создать перевод</button>
         <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
         </form>
         </div>
+</c:if>
     </div>
 
 

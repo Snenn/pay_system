@@ -1,8 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
-<%@ include file="/resourses/include/begin-html.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<p>Cmd ERROR: ${message}</p>
-errror
-<%@ include file="/resourses/include/end-html.jsp" %>
+<div style="color: red;margin-left: 500px; margin-top: 100px; font-size: x-large">Не верный логин и пароль. Попробуйте снова</div>
+<img style="margin-left: 40%;margin-top: 100px"src="../../resourses/images/stop.png"><br>
+<a style="margin-left: 500px" href="/login">Вернуться на главную</a>
 
 

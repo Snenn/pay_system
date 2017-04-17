@@ -66,7 +66,7 @@ public class UserController {
         httpSession.setAttribute ("countCards", creditCardService.getCountCreditCardsByUser(user.getId()));
         httpSession.setAttribute ("sumBalance", accountService.getSumAllBalanceByUser(user.getId()));
         model.addAttribute("accounts", accountService.getAccountsLimitByUser(0,6,user.getId()) );
-        model.addAttribute("creditCardStatuses", accountService.viewCreditCardStatusesForAccount());
+        model.addAttribute("creditCardStatuses", creditCardService.getAllcreditCardsStatus());
 
 
 
@@ -176,6 +176,7 @@ public class UserController {
         User user= (User) httpSession.getAttribute("user");
         Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,30,user.getId()) );
+        model.addAttribute("creditCardStatuses", creditCardService.getAllcreditCardsStatus());
         if (req.getParameter("createPayment") != null) {
             String messages = null;
             try {
@@ -197,6 +198,7 @@ public class UserController {
         User user= (User) httpSession.getAttribute("user");
         Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,30,user.getId()) );
+        model.addAttribute("creditCardStatuses", creditCardService.getAllcreditCardsStatus());
         if (req.getParameter("createTransfer") != null) {
             String messages = null;
             try {
