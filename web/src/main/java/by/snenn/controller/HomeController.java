@@ -69,24 +69,24 @@ public class HomeController {
         return "redirect:/login";
     }
 
-    @RequestMapping(value = {"/reg"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/reg"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showSignUpPage(ModelMap model) {
         return "reg";
     }
 
-    @RequestMapping(value = {"reg/signUp"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"reg/signUp"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String addUser(ModelMap model, @ModelAttribute("userForm") User user,
-                          HttpServletRequest request) throws Exception {
+                          HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (userService.findByLogin(user.getLogin())==null){
             user.setAccounts(null);
             UserRole userRole=userService.getRoleUser();
             user.setUserRole(userRole);
             userService.saveOrUpdate(user);
-            request.getSession().setAttribute("jsp_message", "successful");
+            request.setAttribute("jsp_message", "successful");
             return "login";}
         else {
             request.getSession().setAttribute("jsp_message", "Такой логин существует, выберите другой");
-            return "";}
+            return "redirect:/reg";}
     }
 
 

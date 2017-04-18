@@ -11,10 +11,14 @@
 <e:url value="/j_spring_security_check" var="loginUrl" />
 <head >
     <meta http-equiv="Cache-Control" content="no-cache">
-    <title>pay</title>
+    <title><spring:message code="title.name"/></title>
     <link href="/resourses/css/bootstrap.css" rel="stylesheet" />
     <script src="/resourses/js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <style>body { background:url("../../resourses/images/homeBackground.jpg")}
+    </style>
+    <link rel="shortcut icon" href="/resourses/images/logo.png"/>
+
 </head>
 
 <body>
@@ -28,8 +32,8 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav navbar-right">
                 <c:set var="locale" value="${pageContext.response.locale}"/>
-                    <li><a href="?locale=en" ><spring:message code="title.en"/>  <img src="../../resourses/images/eng.png"></a></li>
-                    <li><a href="?locale=ru"><spring:message code="title.ru"/>  <img src="../../resourses/images/rus.png"></a></li>
+                    <li><a href="?locale=en" style="color: white"><spring:message code="title.en"/>  <img src="../../resourses/images/eng.png" style="width: 30px;height: 30px"></a></li>
+                    <li><a href="?locale=ru" style="color: white"><spring:message code="title.ru"/>  <img src="../../resourses/images/rus.png" style="width: 30px;height: 30px"></a></li>
             </ul>
         </div>
         
@@ -37,24 +41,16 @@
 
         <div class="navbar-header navbar-right" role="form">
             <sec:authorize access="isAuthenticated()">
-                <a class="navbar-brand"><spring:message code="title.hello"/> <sec:authentication property="principal.displayName"/></a>
                 <a type="submit" style="margin-top: 10px" class="btn btn-default" href=/logout><spring:message code="title.logout"/></a>
             </sec:authorize>
         </div>
 
+        <div class="navbar-header navbar-right" role="form">
+
         <sec:authorize access="!isAuthenticated()">
-        <form class="navbar-form navbar-right" role="form" method="post"  action="${loginUrl}">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <div class="form-group">
-                <input id="j_username" name="j_username" type="text" placeholder="<spring:message code="title.login"/>" class="form-control">
-            </div>
-            <div class="form-group">
-                <input id="j_password" name="j_password" type="password" placeholder="<spring:message code="title.password"/>" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-default"><spring:message code="title.signIn"/></button>
-            <a type="submit" class="btn btn-default" href=/reg><spring:message code="title.signUp"/></a>
-        </form>
+            <a type="submit" style="margin-top: 10px" class="btn btn-default" href=/>Главная</a>
         </sec:authorize>
+        </div>
 
     </div>
 </div>
