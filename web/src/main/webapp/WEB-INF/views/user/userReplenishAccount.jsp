@@ -16,7 +16,7 @@
 <div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 690px; height: 500px; margin-left: 10px; float: left; margin-top: 10px">
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
-        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Пополнение счета</div>
+        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;"><spring:message code="user.replenishAccount"/></div>
 <c:if test="${countAccounts==0}">
     <div style="margin-left: 20px; margin-top: 50px">
         У вас нет актуального счета.<br><br>
@@ -27,20 +27,18 @@
         <div style="margin-left: 20px; margin-top: 20px">
             <form action="/user/replenishAccount" method="POST">
 
-        Сумма пополнения должна быть целой и более 0.<br><br>
+                <spring:message code="user.replenishAccount.message1"/>
                 <input style="width: 400px" id="sum" name="sum" type="text" pattern="[0-9]+" required title="Разрешены только цифры" placeholder="input sum" class="form-control input-md" >
 <br>
-                Выберите счет для пополнения.<br><br>
-
+                <spring:message code="user.replenishAccount.message2"/>
                 <select class="form-control" style="width: 400px" name="selectAccount">
                     <c:forEach var="account" items="${accounts}">
                         <option>ID ${account.getId()} balance ${account.getBalance()} byn </option>
                     </c:forEach>
                 </select>
                 <br>
-        Деньги будут зачислены сразу.<br><br>
-
-                <button class="btn btn-success" type="submit" name="replenishAccount" >Пополнить счет</button>
+                <spring:message code="user.replenishAccount.message3"/>
+                <button class="btn btn-success" type="submit" name="replenishAccount" ><spring:message code="user.replenishAccount"/></button>
                 <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
             </form>
         </div>

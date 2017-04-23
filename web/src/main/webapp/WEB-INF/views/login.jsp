@@ -19,7 +19,9 @@
             <button type="submit" class="btn btn-success" style="width: 100px"><spring:message code="title.signIn"/></button><br>
         </form>
     </div>
-    <a style="margin-left: 50px; width: 100px" type="submit" class="btn btn-default" href=/reg><spring:message code="title.signUp"/></a>
+    <a style="margin-left: 50px; width: auto" type="submit" class="btn btn-default" href=/reg><spring:message code="title.signUp"/></a>
+    <a style="margin-left: 50px; margin-top: 10px; width: auto" type="submit" class="btn btn-default" href=/>Вернуться</a>
+
 </div>
 
 <div style="width: 600px; height: 200px;     background-color: rgba(255, 255, 255, 0.6); margin-left: 600px; margin-top: 200px; border-radius: 5px">

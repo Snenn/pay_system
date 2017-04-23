@@ -12,12 +12,12 @@
 
 <div class="container" style="margin-top: 30px; size: 1000px ">
     <div class="row">
-            <div class=col-md-2><a href=/admin class="btn btn-success" style="width: 165px" ><spring:message code="title.admin.main"/></a></div>
-            <div class=col-md-2><a href=/admin/users class="btn btn-success" style="width: 165px" ><spring:message code="title.admin.users"/></a></div>
-            <div class=col-md-2><a href=/admin/accounts class="btn btn-success" style="width: 165px" ><spring:message code="title.admin.accounts"/></a></div>
-            <div class=col-md-2><a href=/admin/cr type="submit" class="btn btn-success" style="width: 165px" ><spring:message code="title.admin.creditCards"/></a></div>
-            <div class=col-md-2><a href=/admin/payments class="btn btn-success" style="width: 165px" ><spring:message code="title.admin.payments"/></a></div>
-            <div class=col-md-2><a href=/admin/transfers class="btn btn-success" style="width: 165px" ><spring:message code="title.admin.transfers"/></a></div>
+            <div class=col-md-2><a href=/admin class="btn btn-success" style="width: 165px" ><spring:message code="admin.main"/></a></div>
+            <div class=col-md-2><a href=/admin/users class="btn btn-success" style="width: 165px" ><spring:message code="users"/></a></div>
+            <div class=col-md-2><a href=/admin/accounts class="btn btn-success" style="width: 165px" ><spring:message code="accounts"/></a></div>
+            <div class=col-md-2><a href=/admin/cr type="submit" class="btn btn-success" style="width: 165px" ><spring:message code="creditCards"/></a></div>
+            <div class=col-md-2><a href=/admin/payments class="btn btn-success" style="width: 165px" ><spring:message code="payments"/></a></div>
+            <div class=col-md-2><a href=/admin/transfers class="btn btn-success" style="width: 165px" ><spring:message code="transfers"/></a></div>
     </div>
 </div>
 

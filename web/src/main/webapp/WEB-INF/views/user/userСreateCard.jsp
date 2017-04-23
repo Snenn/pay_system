@@ -16,7 +16,7 @@
 <div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 690px; height: 500px; margin-left: 10px; float: left; margin-top: 10px">
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
-        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Создание карты</div>
+        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;"><spring:message code="user.createCard"/></div>
 <c:if test="${countAccounts==0}">
     <div style="margin-left: 20px; margin-top: 50px">
         У вас нет актуального счета.<br><br>
@@ -26,21 +26,15 @@
 <c:if test="${countAccounts>0}">
             <div style="margin-left: 20px; margin-top: 20px">
 
-            Выберите счет к которому будет прикреплена карта.<br><br>
-            <form action="/user/createCard" method="post">
+                <spring:message code="user.createCard.message1"/>
+                <form action="/user/createCard" method="post">
                 <select class="form-control" style="width: 400px" name="selectCard">
                     <c:forEach var="account" items="${accounts}">
                         <option>ID ${account.getId()} balance ${account.getBalance()} byn </option>
                     </c:forEach>
                 </select>
-                <br>
-
-        Баланс счета будет привязан к карте.<br><br>
-
-        Карту можно будет забрать в головном офисе через 3 рабочих дня после создания.<br><br>
-
-        Оплату создания карты можно будет произвести в момент ее получения в отделении.<br><br>
-                <button class="btn btn-success" type="submit" name="createCard" >Создать карту</button>
+                <br><spring:message code="user.createCard.message2"/>
+                <button class="btn btn-success" type="submit" name="createCard" ><spring:message code="user.createCard"/></button>
                 <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
             </form>
         </div>

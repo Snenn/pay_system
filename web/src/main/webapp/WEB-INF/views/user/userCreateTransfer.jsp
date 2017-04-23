@@ -16,7 +16,7 @@
 <div STYLE="border-radius: 4px; background-color: #f1f1f8; width: 690px; height: 500px; margin-left: 10px; float: left; margin-top: 10px">
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
-        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;">Создание перевода</div>
+        <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;"><spring:message code="user.createTransfer"/></div>
 <c:if test="${countCards==0}">
     <div style="margin-left: 20px; margin-top: 50px">
         У вас нет карт.<br><br>
@@ -26,9 +26,7 @@
 <c:if test="${countCards>0}">
         <div style="margin-left: 20px; margin-top: 20px">
 
-        Ваша карта не должна быть заблокирована.<br><br>
-        Выберите карту с которой будет произведен перевод.<br><br>
-        Остаток средств на карте должен быть больше или равен сумму перевода.<br><br>
+            <spring:message code="user.createTransfer.message1"/>
             <form action="/user/createTransfer" method="post">
                 <select class="form-control" style="width: 400px" name="selectCard">
                     <c:forEach var="card" items="${cards}">
@@ -41,14 +39,14 @@
                         </option>
                     </c:forEach>
                         </select><br>
-        Сумма перевода должна быть целой<br><br>
+                <spring:message code="user.createTransfer.message2"/>
         <input style="width: 400px" id="sum" name="sum" type="text" pattern="[0-9]+" required title="Разрешены только цифры" placeholder="input sum" class="form-control input-md" required="">
         <br>
-        Карта получателя должна существовать и не должна быть заблокирована.<br><br>
+                <spring:message code="user.createTransfer.message3"/>
         <input style="width: 400px" id="idRecipient" name="idRecipient" type="text" pattern="[0-9]+" required title="Разрешены только цифры" placeholder="input id card Recipient" class="form-control input-md" required="">
         <br>
 
-        <button class="btn btn-success" type="submit" name="createTransfer" >Создать перевод</button>
+        <button class="btn btn-success" type="submit" name="createTransfer" ><spring:message code="user.createTransfer"/></button>
         <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
         </form>
         </div>

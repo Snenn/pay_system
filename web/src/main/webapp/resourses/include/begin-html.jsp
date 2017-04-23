@@ -45,12 +45,7 @@
             </sec:authorize>
         </div>
 
-        <div class="navbar-header navbar-right" role="form">
 
-        <sec:authorize access="!isAuthenticated()">
-            <a type="submit" style="margin-top: 10px" class="btn btn-default" href=/>Главная</a>
-        </sec:authorize>
-        </div>
 
     </div>
 </div>
