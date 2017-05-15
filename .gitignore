@@ -1,7 +1,7 @@
 
-.idea
+/.idea
 dao/target/
 out/
 services/target/
 web/target/
-pay_system.iml
+/pay_system.iml
