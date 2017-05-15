@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <div STYLE="border-radius: 4px; background-color: f1f1f8; width: 360px; height: 250px">
+    <div STYLE="border-radius: 4px; background-color: f1f1f8; width: 360px; height: 230px">
         <br><p style="text-align: center; margin-top: 20px">Личные данные администратора</p><br>
         <p style="margin-left: 20px">Фамилия:   ${user.surname}</p>
         <p style="margin-left: 20px">Имя:   ${user.name}</p>
@@ -10,7 +10,7 @@
 
     </div>
 
-    <div STYLE="border-radius: 4px; background-color: f1f1f8; margin-top: 30px; width: 360px; height: 250px">
+    <div STYLE="border-radius: 4px; background-color: f1f1f8; margin-top: 30px; width: 360px; height: 270px">
         <br><p style="text-align: center; margin-top: 20px">Общие данные системы платежей</p><br>
         <p style="margin-left: 20px">Общее число клиентов: ${countUsers}  </p>
         <p style="margin-left: 20px">Общее число счетов:   ${countAccounts} </p>

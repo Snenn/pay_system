@@ -1,6 +1,5 @@
 package by.snenn.controller;
 
-import by.snenn.controller.Util.Form;
 import by.snenn.controller.Util.Messages;
 import by.snenn.controller.Util.Patterns;
 import by.snenn.controller.Util.Util;
@@ -14,28 +13,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.ParseException;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
+    private
     ICreditCardService creditCardService;
     @Autowired
+    private
     IUserService userService;
     @Autowired
+    private
     IAccountService accountService;
     @Autowired
+    private
     IPaymentService paymentService;
     @Autowired
+    private
     ITransferService transferService;
 
     @RequestMapping(value = {"/cr"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showCreditCards(ModelMap model, HttpServletRequest req) {
         User user=userService.findByLogin(Util.getPrincipal());
         model.addAttribute("user", user);
-        int startNumber;
+        int startNumber=Util.getStartIndex(req);
         if (req.getParameter("block") != null) {
             if (req.getParameter("idCard").matches(Patterns.ID_CARD)) {
                 int idCard= Integer.parseInt(req.getParameter("idCard"));
@@ -53,11 +56,6 @@ public class AdminController {
                 req.setAttribute(Messages.msgError, "Input Error");
             }
         }
-        try {startNumber =Form.getInt(req, "startIndex");}
-            catch (ParseException e) {
-                try {startNumber = Form.getInt(req, "startNumber");}
-                    catch (ParseException e1){startNumber = 0;}
-            }
         model.addAttribute("adCount", creditCardService.getCountCreditCards());
         model.addAttribute("startIndex", startNumber);
         model.addAttribute("creditCards", creditCardService.getCreditCardsLimit(startNumber, 8));
@@ -81,12 +79,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/users"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUsers(ModelMap model, HttpServletRequest req) {
-        int startNumber;
-        try {startNumber =Form.getInt(req, "startIndex");}
-        catch (ParseException e) {
-            try {startNumber = Form.getInt(req, "startNumber");}
-            catch (ParseException e1){startNumber = 0;}
-        }
+        int startNumber=Util.getStartIndex(req);
         model.addAttribute("adCount", userService.getCountUsers());
         model.addAttribute("startIndex", startNumber);
         model.addAttribute("users", userService.getUsersLimit(startNumber, 8));
@@ -96,12 +89,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/accounts"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showAccounts(ModelMap model, HttpServletRequest req) {
-        int startNumber;
-        try {startNumber =Form.getInt(req, "startIndex");}
-        catch (ParseException e) {
-            try {startNumber = Form.getInt(req, "startNumber");}
-            catch (ParseException e1){startNumber = 0;}
-        }
+        int startNumber=Util.getStartIndex(req);
         model.addAttribute("adCount", accountService.getCountAccounts());
         model.addAttribute("startIndex", startNumber);
         model.addAttribute("accounts", accountService.getAccountsLimit(startNumber, 8));
@@ -111,12 +99,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/payments"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showPayments(ModelMap model, HttpServletRequest req) {
-        int startNumber;
-        try {startNumber =Form.getInt(req, "startIndex");}
-        catch (ParseException e) {
-            try {startNumber = Form.getInt(req, "startNumber");}
-            catch (ParseException e1){startNumber = 0;}
-        }
+        int startNumber=Util.getStartIndex(req);
         model.addAttribute("adCount", paymentService.getCountPayments());
         model.addAttribute("startIndex", startNumber);
         model.addAttribute("payments", paymentService.getPaymentsLimit(startNumber, 8));
@@ -125,12 +108,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/transfers"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showTransfers(ModelMap model, HttpServletRequest req) {
-        int startNumber;
-        try {startNumber =Form.getInt(req, "startIndex");}
-        catch (ParseException e) {
-            try {startNumber = Form.getInt(req, "startNumber");}
-            catch (ParseException e1){startNumber = 0;}
-        }
+        int startNumber=Util.getStartIndex(req);
         model.addAttribute("adCount", transferService.getCountTransfers());
         model.addAttribute("startIndex", startNumber);
         model.addAttribute("transfers", transferService.getTransfersLimit(startNumber, 8));

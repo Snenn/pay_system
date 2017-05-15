@@ -23,6 +23,7 @@ public class HomeController {
     @Autowired
     MessageSource message;
     @Autowired
+    private
     IUserService userService;
 
     @RequestMapping(value = {"/default"}, method = RequestMethod.GET)
@@ -76,7 +77,7 @@ public class HomeController {
 
     @RequestMapping(value = {"reg/signUp"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String addUser(ModelMap model, @ModelAttribute("userForm") User user,
-                          HttpServletRequest request, HttpServletResponse response) throws Exception {
+                          HttpServletRequest request) throws Exception {
         if (userService.findByLogin(user.getLogin())==null){
             user.setAccounts(null);
             UserRole userRole=userService.getRoleUser();

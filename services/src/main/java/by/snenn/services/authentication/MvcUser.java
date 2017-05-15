@@ -1,4 +1,4 @@
-package by.snenn.services.auth;
+package by.snenn.services.authentication;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;

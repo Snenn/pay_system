@@ -21,18 +21,18 @@ public class UserController {
     @Autowired
     private IAccountService accountService;
     @Autowired
-    ICreditCardService creditCardService;
+    private ICreditCardService creditCardService;
     @Autowired
-    IUserService userService;
+    private IUserService userService;
     @Autowired
-    IPaymentService paymentService;
+    private IPaymentService paymentService;
     @Autowired
-    ITransferService transferService;
+    private ITransferService transferService;
+    private Logger logger = Logger.getLogger(HomeController.class.getName());
 
 
     @RequestMapping(value = {""}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         User user=userService.findByLogin(Util.getPrincipal());
         httpSession.setAttribute("user", user);
 
@@ -74,26 +74,23 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/cards"}, method = {RequestMethod.POST, RequestMethod.GET })
-    public String showUserCardsPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+    public String showUserCardsPage(ModelMap model, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,6,user.getId()) );
         model.addAttribute("creditCardStatuses", accountService.viewCreditCardStatusesForAccount());
         return "userCards";
     }
 
     @RequestMapping(value = {"/payments"}, method = {RequestMethod.POST, RequestMethod.GET })
-    public String showUserPaymentsPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+    public String showUserPaymentsPage(ModelMap model, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("payments", paymentService.getPaymentsLimitByUser(0,6,user.getId()) );
         return "userPayments";
     }
 
     @RequestMapping(value = {"/transfers"}, method = {RequestMethod.POST, RequestMethod.GET })
-    public String showUserTransfersPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
+    public String showUserTransfersPage(ModelMap model, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("transfers", transferService.getTransfersLimitByUser(0,6,user.getId()) );
         return "userTransfers";
     }
@@ -101,7 +98,6 @@ public class UserController {
     @RequestMapping(value = {"/createAccount"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserСreateAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         if (req.getParameter("createAccount") != null) {
             String messages = accountService.createAccount(user);
             model.addAttribute(Messages.msgMessage, messages);
@@ -113,7 +109,6 @@ public class UserController {
 
     @RequestMapping(value = {"/replenishAccount"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserReplenishAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) throws ParseException {
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         User user= (User) httpSession.getAttribute("user");
         model.addAttribute("accounts", accountService.getAccountsLimitByUser(0,6,user.getId()) );
         if (req.getParameter("replenishAccount") != null) {
@@ -134,7 +129,6 @@ public class UserController {
 
     @RequestMapping(value = {"/deleteAccount"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserDeleteAccountPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         User user= (User) httpSession.getAttribute("user");
         model.addAttribute("accounts", accountService.getAccountsLimitByUser(0,6,user.getId()) );
         if (req.getParameter("deleteAccount") != null) {
@@ -148,7 +142,6 @@ public class UserController {
     @RequestMapping(value = {"/createCard"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserСreateCardPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("accounts", accountService.getAccountsLimitByUser(0,6,user.getId()) );
         if (req.getParameter("createCard") != null) {
             String messages = creditCardService.createCreditCard(Parser.parserIdFromForm(req.getParameter("selectCard")));
@@ -161,7 +154,6 @@ public class UserController {
     @RequestMapping(value = {"/deleteCard"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserDeleteCardPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,30,user.getId()) );
         if (req.getParameter("deleteCard") != null) {
             String messages = creditCardService.blockCard(Parser.parserIdFromForm(req.getParameter("selectCard")));
@@ -174,7 +166,6 @@ public class UserController {
     @RequestMapping(value = {"/createPayment"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserCreatePaymentPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,30,user.getId()) );
         model.addAttribute("creditCardStatuses", creditCardService.getAllcreditCardsStatus());
         if (req.getParameter("createPayment") != null) {
@@ -196,7 +187,6 @@ public class UserController {
     @RequestMapping(value = {"/createTransfer"}, method = {RequestMethod.POST, RequestMethod.GET })
     public String showUserCreateTransferPage(ModelMap model, HttpServletRequest req, HttpSession httpSession) {
         User user= (User) httpSession.getAttribute("user");
-        Logger logger = Logger.getLogger(HomeController.class.getName());
         model.addAttribute("cards", creditCardService.getCreditCardsLimitByUser(0,30,user.getId()) );
         model.addAttribute("creditCardStatuses", creditCardService.getAllcreditCardsStatus());
         if (req.getParameter("createTransfer") != null) {

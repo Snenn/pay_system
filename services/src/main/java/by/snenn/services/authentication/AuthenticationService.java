@@ -1,4 +1,4 @@
-package by.snenn.services.auth;
+package by.snenn.services.authentication;
 
 import by.snenn.pojos.User;
 import by.snenn.services.IUserService;

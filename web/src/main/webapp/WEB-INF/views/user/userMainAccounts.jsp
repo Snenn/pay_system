@@ -17,7 +17,7 @@
     <div STYLE="border-radius: 4px; background-color:#fffb7b; width: 690px; height: 30px">
         <div style="font: 'Times New Roman'; font-size: 120%; margin-left: 20px;"><spring:message code="accounts"/></div>
 
-        <div style="margin-top: 20px">
+        <div style="margin-top: 20px" >
 
             <div style="float: left; margin-left: 10%"><spring:message code="IDAccount"/></div>
             <div style="float: left; margin-left: 25%"><spring:message code="balance"/></div>
